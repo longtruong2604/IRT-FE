@@ -1,0 +1,33 @@
+.table-container {
+  margin: 20px;
+  padding: 10px;
+  max-width: 800px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  text-align: center;
+}
+
+th,
+td {
+  border: 1px solid black;
+  padding: 10px;
+}
+
+.header-cell {
+  background-color: #b3d9ff; /* Light blue for headers */
+}
+
+.data-cell {
+  background-color: #f0fff0; /* Light green for data cells */
+}
+
+tr:nth-child(odd) .data-cell {
+  background-color: #ffffcc; /* Light yellow for odd rows */
+}
+
+tr:nth-child(even) .data-cell {
+  background-color: #ccffcc; /* Light green for even rows */
+}
