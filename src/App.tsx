@@ -21,10 +21,13 @@ const App: React.FC = () => {
       const formData = new FormData()
       formData.append('file', file)
 
-      fetch('http://localhost:8080/api/irt/upload', {
-        method: 'POST',
-        body: formData,
-      })
+      fetch(
+        'https://irt-backend-api-eca8741fa578.herokuapp.com/api/irt/upload',
+        {
+          method: 'POST',
+          body: formData,
+        }
+      )
         .then((response) => response.json())
         .then((data) => {
           setFlaskResponse(data.data)
