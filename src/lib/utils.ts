@@ -4,11 +4,15 @@ import { TableData } from '../types/table_data.type'
 export const transformData = (data: ItemData) => {
   const excludeKeys = ['question', 'p_value', 'rpbis', 'difficulty']
   return Object.entries(data)
-    .filter(([key, _]) => !excludeKeys.includes(key)) // Filter out nested objects
+    .filter(([key, _]) => !excludeKeys.includes(key))
     .map(([key, value]): TableData => {
       return {
-        label: key, // Add the key as a label
-        ...value, // Use the value from the item
+        label: key,
+        ...value,
       }
     })
+}
+
+export const normalizePath = (path: string) => {
+  return path.startsWith('/') ? path.slice(1) : path
 }
