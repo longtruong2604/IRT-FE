@@ -53,7 +53,7 @@ const DashBoard = () => {
           <div className="absolute right-0 top-0 size-[230px] rotate-[-4.683deg] rounded-2xl bg-[#C3D6FF]" />
           <div className="absolute bottom-0 left-[50px] size-[230px] rotate-[-23.885deg] rounded-2xl bg-[#F5F0E7]" />
           <div className="absolute top-0 size-[230px] rotate-[-15deg] rounded-2xl bg-[#F0ECF7]" />
-          <img src={banner} alt="" className="z-0 h-[300px]" />
+          <img src={banner} alt="" className="z-0 h-[300px] rounded-2xl" />
         </div>
       </div>
       <div className="flex flex-col gap-[60px]">

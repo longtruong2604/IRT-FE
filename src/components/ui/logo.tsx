@@ -1,11 +1,24 @@
+import { cn } from '@/lib/utils'
 import { Link } from 'react-router-dom'
 
-export function Logo() {
+export function Logo({
+  className,
+  logoUrl = '/logo.png',
+}: {
+  className?: string
+  logoUrl?: string
+}) {
   return (
     <>
-      <Link className="item-center flex whitespace-normal px-9 pt-10" to="/">
-        <img className="h-7 w-9 pr-2" src="/logo.png" alt="logo" />
-        <h3 className="text-xl font-bold text-white"> MCQinsight</h3>
+      <Link
+        className={cn(
+          'item-center flex whitespace-normal px-9 pt-10 text-xl font-bold text-white',
+          className
+        )}
+        to="/"
+      >
+        <img className="h-7 w-9 pr-2" src={logoUrl} alt="logo" />
+        <h3> MCQinsight</h3>
       </Link>
     </>
   )

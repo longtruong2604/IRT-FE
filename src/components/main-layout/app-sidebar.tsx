@@ -4,7 +4,7 @@ import {
   SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
+  SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
@@ -14,17 +14,21 @@ import { LogOut, Settings } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
 import { DarkModeToggle } from './dark-mode-toggle'
 import { useState } from 'react'
+import { Logo } from '../ui/logo'
 
 export function AppSidebar() {
   const [activeLink, setActiveLink] =
     useState<(typeof MenuItems)[number]['value']>()
   return (
     <Sidebar>
+      <SidebarHeader className="h-[64px] items-center justify-center rounded-none border-b border-sidebar-border pb-2">
+        <Logo
+          className="gap-2 px-0 pt-0 text-foreground"
+          logoUrl="/logo-blue.png"
+        />
+      </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel className="h-[56px] rounded-none border-b border-sidebar-border">
-            Application Name
-          </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu className="gap-2">
               {MenuItems.map((item) => (
