@@ -2,36 +2,39 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import Layout from './components/layout/index.tsx'
+import Layout from './components/main-layout/index.tsx'
 import { ThemeProvider } from './components/theme-provider.tsx'
 import './index.css'
-import DashBoard from './pages/dashboard/index.tsx'
 import Analysis from './pages/analysis/index.tsx'
+import { ResetPasswordPage } from './pages/authorization/reset-password.tsx'
+import { SignInPage } from './pages/authorization/sign-in.tsx'
+import { SignUpPage } from './pages/authorization/sign-up.tsx'
+import { VerifyMailPage } from './pages/authorization/verify-mail.tsx'
+import DashBoard from './pages/dashboard/index.tsx'
+
+const mainRoutes = [
+  { index: true, element: <DashBoard /> },
+  { path: 'settings', element: <div>Settings</div> },
+  { path: 'analysis', element: <Analysis /> },
+  { path: 'history', element: <div>History</div> },
+]
+
+// Authentication routes without `/auth` prefix
+const authRoutes = [
+  { path: 'signin', element: <SignInPage /> },
+  { path: 'signup', element: <SignUpPage /> },
+  { path: 'forgot-password', element: <ResetPasswordPage /> },
+  { path: 'verify-mail', element: <VerifyMailPage /> },
+]
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Layout />,
     errorElement: <div>Not Found</div>,
-    children: [
-      {
-        index: true,
-        element: <DashBoard />,
-      },
-      {
-        path: '/settings',
-        element: <div>setting</div>,
-      },
-      {
-        path: '/analysis',
-        element: <Analysis />,
-      },
-      {
-        path: '/history',
-        element: <div>history</div>,
-      },
-    ],
+    children: mainRoutes,
   },
+  ...authRoutes,
 ])
 
 createRoot(document.getElementById('root')!).render(

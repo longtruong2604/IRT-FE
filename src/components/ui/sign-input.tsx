@@ -1,6 +1,7 @@
 import { Button } from './button'
 import React from 'react'
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 interface IconInputLeadProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -66,12 +67,12 @@ export function SignIn() {
               />
               <div className="flex items-center justify-end">
                 <div className="mb-3 mt-3 text-sm">
-                  <a
-                    href="#"
+                  <Link
+                    to="/forgot-password"
                     className="hover:text-blueCustom-500 text-left font-semibold text-blueCustom"
                   >
                     Forgot password?
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -86,10 +87,10 @@ export function SignIn() {
               <h4 className="mt-3 text-center text-gray-600">
                 Don't have any accounts?
                 <span>
-                  <a className="font-bold text-blueCustom" href="#">
+                  <Link className="font-bold text-blueCustom" to="/signup">
                     {' '}
                     Sign up
-                  </a>
+                  </Link>
                 </span>
               </h4>
             </div>
@@ -177,10 +178,10 @@ export function SignUp() {
               <h4 className="mt-3 text-center text-gray-600">
                 Already have an account?
                 <span>
-                  <a className="font-bold text-blueCustom" href="#">
+                  <Link className="font-bold text-blueCustom" to="/signin">
                     {' '}
                     Log in
-                  </a>
+                  </Link>
                 </span>
               </h4>
             </div>
@@ -228,10 +229,10 @@ export function ResetPassword() {
               </Button>
               <h4 className="mt-5 text-center text-gray-600">
                 <span>
-                  <a className="font-bold text-blueCustom" href="#">
+                  <Link className="font-bold text-blueCustom" to="/signin">
                     {' '}
                     Back to sign in
-                  </a>
+                  </Link>
                 </span>
               </h4>
             </div>

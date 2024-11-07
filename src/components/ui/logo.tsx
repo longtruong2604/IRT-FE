@@ -1,10 +1,12 @@
+import { Link } from 'react-router-dom'
+
 export function Logo() {
   return (
     <>
-      <div className="item-center flex whitespace-normal px-9 pt-10">
+      <Link className="item-center flex whitespace-normal px-9 pt-10" to="/">
         <img className="h-7 w-9 pr-2" src="/logo.png" alt="logo" />
         <h3 className="text-xl font-bold text-white"> MCQinsight</h3>
-      </div>
+      </Link>
     </>
   )
 }
