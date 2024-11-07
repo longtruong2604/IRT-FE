@@ -15,11 +15,15 @@ import DashBoard from './pages/dashboard/index.tsx'
 const mainRoutes = [
   { index: true, element: <DashBoard /> },
   { path: 'settings', element: <div>Settings</div> },
-  { path: 'analysis', element: <Analysis /> },
+  {
+    path: 'analysis',
+    element: <Analysis />,
+  },
+  { path: 'analysis/students', element: <div>Students</div> },
+  { path: 'analysis/items', element: <div>Item</div> },
   { path: 'history', element: <div>History</div> },
 ]
 
-// Authentication routes without `/auth` prefix
 const authRoutes = [
   { path: 'signin', element: <SignInPage /> },
   { path: 'signup', element: <SignUpPage /> },

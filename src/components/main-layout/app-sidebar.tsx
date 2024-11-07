@@ -4,17 +4,23 @@ import {
   SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
+  SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/sidebar'
 import { MenuItems } from '@/constants/menu-item'
-import { LogOut, Settings } from 'lucide-react'
-import { NavLink } from 'react-router-dom'
-import { DarkModeToggle } from './dark-mode-toggle'
+import { ChevronDown, LogOut, Settings } from 'lucide-react'
 import { useState } from 'react'
+import { NavLink } from 'react-router-dom'
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from '../ui/collapsible'
 import { Logo } from '../ui/logo'
+import { DarkModeToggle } from './dark-mode-toggle'
 
 export function AppSidebar() {
   const [activeLink, setActiveLink] =
@@ -28,35 +34,88 @@ export function AppSidebar() {
         />
       </SidebarHeader>
       <SidebarContent>
-        <SidebarGroup>
-          <SidebarGroupContent>
-            <SidebarMenu className="gap-2">
-              {MenuItems.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <NavLink
-                    to={item.url}
-                    className={({ isActive }) => {
-                      if (isActive) setActiveLink(item.value)
-                      return ''
-                      // return 'flex items-center gap-4 rounded-lg px-4 py-2 transition-colors'
-                    }}
+        <SidebarMenu className="gap-2">
+          {MenuItems.map((item) =>
+            item.children ? (
+              <Collapsible>
+                <SidebarGroup className="p-0">
+                  <SidebarGroupLabel className="p-0 pr-3" asChild>
+                    <CollapsibleTrigger>
+                      <SidebarMenuItem className="flex-1">
+                        <NavLink
+                          to={item.url}
+                          className={({ isActive }) => {
+                            if (isActive) setActiveLink(item.value)
+                            return ''
+                          }}
+                        >
+                          <SidebarMenuButton
+                            className="h-[48px] px-[16px] leading-[160%] text-[#64748B] hover:text-[#64748B] active:text-primary-600-base data-[active=true]:font-bold data-[active=true]:text-primary-600-base"
+                            asChild
+                            isActive={activeLink === item.value}
+                          >
+                            <div>
+                              <item.icon strokeWidth={3} />
+                              <span>{item.title}</span>
+                            </div>
+                          </SidebarMenuButton>
+                        </NavLink>
+                      </SidebarMenuItem>
+                      <ChevronDown className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180" />
+                    </CollapsibleTrigger>
+                  </SidebarGroupLabel>
+                  <CollapsibleContent>
+                    <SidebarGroupContent>
+                      {item.children.map((subItem) => (
+                        <SidebarMenuItem className="flex-1">
+                          <NavLink
+                            to={item.url + subItem.url}
+                            className={({ isActive }) => {
+                              if (isActive) setActiveLink(subItem.value)
+                              return ''
+                            }}
+                          >
+                            <SidebarMenuButton
+                              className="h-[30px] px-[16px] pl-10 leading-[160%] text-[#64748B] hover:text-[#64748B] active:text-primary-600-base data-[active=true]:font-bold data-[active=true]:text-primary-600-base"
+                              asChild
+                              isActive={activeLink === subItem.value}
+                            >
+                              <div>
+                                <subItem.icon strokeWidth={3} />
+                                <span>{subItem.title}</span>
+                              </div>
+                            </SidebarMenuButton>
+                          </NavLink>
+                        </SidebarMenuItem>
+                      ))}
+                    </SidebarGroupContent>
+                  </CollapsibleContent>
+                </SidebarGroup>
+              </Collapsible>
+            ) : (
+              <SidebarMenuItem key={item.title}>
+                <NavLink
+                  to={item.url}
+                  className={({ isActive }) => {
+                    if (isActive) setActiveLink(item.value)
+                    return ''
+                  }}
+                >
+                  <SidebarMenuButton
+                    className="h-[48px] px-[16px] leading-[160%] text-[#64748B] hover:text-[#64748B] active:text-primary-600-base data-[active=true]:font-bold data-[active=true]:text-primary-600-base"
+                    asChild
+                    isActive={activeLink === item.value}
                   >
-                    <SidebarMenuButton
-                      className="h-[48px] px-[16px] leading-[160%] text-[#64748B] hover:text-[#64748B] active:text-primary-600-base data-[active=true]:font-bold data-[active=true]:text-primary-600-base"
-                      asChild
-                      isActive={activeLink === item.value}
-                    >
-                      <div>
-                        <item.icon strokeWidth={3} />
-                        <span>{item.title}</span>
-                      </div>
-                    </SidebarMenuButton>
-                  </NavLink>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
+                    <div>
+                      <item.icon strokeWidth={3} />
+                      <span>{item.title}</span>
+                    </div>
+                  </SidebarMenuButton>
+                </NavLink>
+              </SidebarMenuItem>
+            )
+          )}
+        </SidebarMenu>
       </SidebarContent>
       <SidebarFooter>
         <NavLink

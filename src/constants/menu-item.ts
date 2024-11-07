@@ -12,6 +12,20 @@ export const MenuItems = [
     url: '/analysis',
     icon: ChartBar,
     value: 'analysis',
+    children: [
+      {
+        title: 'Stuents',
+        url: '/students',
+        icon: ChartBar,
+        value: 'students',
+      },
+      {
+        title: 'Items',
+        url: '/items',
+        icon: ChartBar,
+        value: 'items',
+      },
+    ],
   },
   {
     title: 'Lịch sử',
