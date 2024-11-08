@@ -8,7 +8,7 @@ function getRandomStat(min = 0, max = 1) {
 }
 
 export const MOCK_ITEM_DATA: Item[] = Array.from(
-  { length: 40 },
+  { length: 120 },
   (_, index) => ({
     item_no: index + 1,
     key: getRandomKey(),

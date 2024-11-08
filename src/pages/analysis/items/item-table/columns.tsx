@@ -3,6 +3,7 @@ import { CollapsibleTrigger } from '@/components/ui/collapsible'
 import { ColumnDef } from '@tanstack/react-table'
 import { ArrowUpDown, ChevronDown } from 'lucide-react'
 import { Item } from './MOCK_DATA'
+import { Badge } from '@/components/ui/badge'
 
 export const columns: ColumnDef<Item>[] = [
   {
@@ -55,7 +56,7 @@ export const columns: ColumnDef<Item>[] = [
     accessorKey: 'difficulty',
     header: 'Phân loại',
     cell: ({ row }) => {
-      const value = row.getValue('P_difficulty') as number
+      const value = row.getValue('p_difficulty') as number
       let displayValue
       if (value > 0.1 && value < 0.5) {
         displayValue = 'Easy'
@@ -64,7 +65,7 @@ export const columns: ColumnDef<Item>[] = [
       } else {
         displayValue = 'Hard'
       }
-      return <div className="lowercase">{displayValue}</div>
+      return <Badge>{displayValue}</Badge>
     },
   },
   {
@@ -80,7 +81,7 @@ export const columns: ColumnDef<Item>[] = [
       } else {
         displayValue = 'Tạm được'
       }
-      return <div className="lowercase">{displayValue}</div>
+      return <Badge>{displayValue}</Badge>
     },
   },
   {

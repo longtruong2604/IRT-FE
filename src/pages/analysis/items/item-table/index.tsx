@@ -35,6 +35,7 @@ import { columns } from './columns'
 import { MOCK_ITEM_DATA } from './MOCK_DATA'
 import { CustomAreaChart } from '@/components/chart/area-chart'
 import { MetricsTable } from './metric-table'
+import AutoPagination from '@/components/auto-paginations'
 
 const data = MOCK_ITEM_DATA
 
@@ -70,10 +71,10 @@ export function DataTableDemo() {
     <div className="w-full">
       <div className="flex items-center py-4">
         <Input
-          placeholder="Filter emails..."
-          value={(table.getColumn('email')?.getFilterValue() as string) ?? ''}
+          placeholder="Filter items..."
+          value={(table.getColumn('item_no')?.getFilterValue() as string) ?? ''}
           onChange={(event) =>
-            table.getColumn('email')?.setFilterValue(event.target.value)
+            table.getColumn('item_no')?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />
@@ -141,7 +142,7 @@ export function DataTableDemo() {
                     </TableRow>
                     <CollapsibleContent asChild>
                       <tr>
-                        <td colSpan={4}>
+                        <td colSpan={4} className="pt-5">
                           <MetricsTable />
                         </td>
                         <td colSpan={3}>
@@ -166,27 +167,18 @@ export function DataTableDemo() {
         </Table>
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
-        <div className="flex-1 text-sm text-muted-foreground">
-          {table.getFilteredSelectedRowModel().rows.length} of{' '}
-          {table.getFilteredRowModel().rows.length} row(s) selected.
+        <div className="flex-1 py-4 text-xs text-muted-foreground">
+          Hiển thị <strong>{table.getPaginationRowModel().rows.length}</strong>{' '}
+          trong <strong>{data.length}</strong> kết quả
         </div>
-        <div className="space-x-2">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
-          >
-            Previous
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
-          >
-            Next
-          </Button>
+        <div>
+          <AutoPagination
+            page={table.getState().pagination.pageIndex + 1}
+            pageSize={table.getPageCount()}
+            isLink={false}
+            pathname="/analysis/items"
+            onClick={(pageIndex) => table.setPageIndex(pageIndex - 1)}
+          />
         </div>
       </div>
     </div>
