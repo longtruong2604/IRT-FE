@@ -31,9 +31,9 @@ const chartConfig = {
 
 export function CustomAreaChart() {
   return (
-    <Card className="w-[400px]">
-      <CardContent>
-        <ChartContainer config={chartConfig}>
+    <Card className=" ">
+      <CardContent className="">
+        <ChartContainer config={chartConfig} className="">
           <AreaChart
             accessibilityLayer
             data={chartData}
