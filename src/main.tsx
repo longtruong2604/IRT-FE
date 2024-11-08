@@ -11,6 +11,7 @@ import { SignInPage } from './pages/authorization/sign-in.tsx'
 import { SignUpPage } from './pages/authorization/sign-up.tsx'
 import { VerifyMailPage } from './pages/authorization/verify-mail.tsx'
 import DashBoard from './pages/dashboard/index.tsx'
+import Items from './pages/analysis/items/index.tsx'
 
 const mainRoutes = [
   { index: true, element: <DashBoard /> },
@@ -20,7 +21,7 @@ const mainRoutes = [
     element: <Analysis />,
   },
   { path: 'analysis/students', element: <div>Students</div> },
-  { path: 'analysis/items', element: <div>Item</div> },
+  { path: 'analysis/items', element: <Items /> },
   { path: 'history', element: <div>History</div> },
 ]
 

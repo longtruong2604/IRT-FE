@@ -14,7 +14,7 @@ export const MenuItems = [
     value: 'analysis',
     children: [
       {
-        title: 'Stuents',
+        title: 'Students',
         url: '/students',
         icon: ChartBar,
         value: 'students',
