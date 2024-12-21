@@ -63,7 +63,9 @@ const CellItem = (key: keyof OptionDetails, value: number) => {
   }
 
   return (
-    <TableCell className={cn('font-semibold', className)}>{value}</TableCell>
+    <TableCell className={cn('text-center font-semibold', className)}>
+      {value}
+    </TableCell>
   )
 }
 
@@ -94,10 +96,10 @@ export function MetricsTable({
       <TableHeader>
         <TableRow>
           <TableHead className="w-[100px]">Chỉ số</TableHead>
-          <TableHead>A</TableHead>
-          <TableHead>B</TableHead>
-          <TableHead>C</TableHead>
-          <TableHead>D</TableHead>
+          <TableHead className="text-center">A</TableHead>
+          <TableHead className="text-center">B</TableHead>
+          <TableHead className="text-center">C</TableHead>
+          <TableHead className="text-center">D</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
