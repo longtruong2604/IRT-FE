@@ -1,6 +1,6 @@
 import http, { ApiResponse } from '@/lib/httpClient'
 import { CTTAnalysisRequest } from '@/pages/dashboard/popup-dialog'
-import { CTTAnalysis, CTTGeneralDetails } from '@/types/ctt-analysis.type'
+import { CTTAnalysisResult, CTTGeneralDetails } from '@/types/ctt-analysis.type'
 
 export const cttAnalyzeService = {
   analyze({
@@ -12,7 +12,7 @@ export const cttAnalyzeService = {
     questionFile,
     answerFile,
     questionSetFile,
-  }: CTTAnalysisRequest): Promise<ApiResponse<CTTAnalysis>> {
+  }: CTTAnalysisRequest): Promise<ApiResponse<CTTAnalysisResult>> {
     console.log(
       projectName,
       numberOfChoices,
@@ -26,14 +26,14 @@ export const cttAnalyzeService = {
     const formData = new FormData()
     formData.append('file', answerFile[0])
 
-    return http.post<CTTAnalysis>('/ctt/analyze', formData, {
+    return http.post<CTTAnalysisResult>('/ctt/analyze', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
     })
   },
-  getResult(id: string): Promise<ApiResponse<CTTAnalysis>> {
-    return http.get<CTTAnalysis>(`/ctt/items/${id}`)
+  getResult(id: string): Promise<ApiResponse<CTTAnalysisResult>> {
+    return http.get<CTTAnalysisResult>(`/ctt/items/${id}`)
   },
 
   getGeneralDetails(id: string): Promise<ApiResponse<CTTGeneralDetails>> {

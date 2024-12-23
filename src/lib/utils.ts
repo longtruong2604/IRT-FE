@@ -1,3 +1,4 @@
+import { RelevantKeys } from '@/types/ctt-analysis.type'
 import { ItemData } from '@/types/response_data.type'
 import { TableData } from '@/types/table_data.type'
 import { clsx, type ClassValue } from 'clsx'
@@ -40,4 +41,14 @@ export function formatBytes(
       ? (accurateSizes[i] ?? 'Bytes')
       : (sizes[i] ?? 'Bytes')
   }`
+}
+
+export const getStatsLabel = (name: RelevantKeys) => {
+  return name === 'difficulty'
+    ? 'Độ khó'
+    : name === 'discrimination'
+      ? 'Độ phân cách'
+      : name === 'r_pbis'
+        ? 'R_PBIS'
+        : name
 }

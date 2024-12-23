@@ -1,4 +1,4 @@
-export type CTTAnalysis = {
+export type CTTAnalysisResult = {
   [key: string]: {
     difficulty: number
     difficulty_category: string
@@ -41,3 +41,21 @@ export type AverageDetails = Readonly<{
   average_difficulty: number
   average_rpbis: number
 }>
+
+export type RelevantKeys = Extract<
+  keyof CTTAnalysisResult[keyof CTTAnalysisResult],
+  'difficulty' | 'discrimination' | 'r_pbis'
+>
+
+// Map each key to its type in CTTAnalysisResult
+type ValueType<Key extends RelevantKeys> =
+  CTTAnalysisResult[keyof CTTAnalysisResult][Key]
+
+export type ReviewQuestion = {
+  id: string
+  violatedIndices: {
+    name: RelevantKeys
+    value: ValueType<RelevantKeys>
+    message: string
+  }[]
+}

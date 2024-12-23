@@ -1,58 +1,89 @@
-'use client'
-
 import * as React from 'react'
 import { Label, Legend, Pie, PieChart } from 'recharts'
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 import {
   ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart'
-const chartData = [
-  { browser: 'chrome', visitors: 275, fill: 'var(--color-chrome)' },
-  { browser: 'safari', visitors: 200, fill: 'var(--color-safari)' },
-  { browser: 'firefox', visitors: 287, fill: 'var(--color-firefox)' },
-  { browser: 'edge', visitors: 173, fill: 'var(--color-edge)' },
-  { browser: 'other', visitors: 190, fill: 'var(--color-other)' },
-]
+import { getStatsLabel } from '@/lib/utils'
+import { RelevantKeys } from '@/types/ctt-analysis.type'
+
+const groupData: Record<
+  RelevantKeys,
+  { group: string; count: number; fill: string }[]
+> = {
+  difficulty: [
+    { group: 'easy', count: 100, fill: 'var(--very-good-text)' },
+    { group: 'medium', count: 200, fill: 'var(--bad-text)' },
+    { group: 'hard', count: 300, fill: 'var(--very-bad-text)' },
+  ],
+  discrimination: [
+    { group: 'easy', count: 300, fill: 'var(--very-good-text)' },
+    { group: 'medium', count: 200, fill: 'var(--bad-text)' },
+    { group: 'hard', count: 100, fill: 'var(--very-bad-text)' },
+  ],
+  r_pbis: [
+    { group: 'easy', count: 200, fill: 'var(--very-good-text)' },
+    { group: 'medium', count: 100, fill: 'var(--bad-text)' },
+    { group: 'hard', count: 300, fill: 'var(--very-bad-text)' },
+  ],
+}
 
 const chartConfig = {
-  visitors: {
-    label: 'Visitors',
+  count: {
+    label: 'Count',
   },
-  chrome: {
-    label: 'Chrome',
-    color: 'hsl(var(--chart-1))',
+  easy: {
+    label: 'Dễ',
+    color: 'var(--very-good-text)',
   },
-  safari: {
-    label: 'Safari',
-    color: 'hsl(var(--chart-2))',
+  medium: {
+    label: 'Trung bình',
+    color: 'var(--bad-text)',
   },
-  firefox: {
-    label: 'Firefox',
-    color: 'hsl(var(--chart-3))',
-  },
-  edge: {
-    label: 'Edge',
-    color: 'hsl(var(--chart-4))',
-  },
-  other: {
-    label: 'Other',
-    color: 'hsl(var(--chart-5))',
+  hard: {
+    label: 'Khó',
+    color: 'var(--very-bad-text)',
   },
 } satisfies ChartConfig
 
 export function ItemPieChart() {
-  const totalVisitors = React.useMemo(() => {
-    return chartData.reduce((acc, curr) => acc + curr.visitors, 0)
-  }, [])
+  const [selectedGroup, setSelectedGroup] = React.useState('difficulty')
+
+  const currentData = groupData[selectedGroup as keyof typeof groupData]
+
+  const totalCount = React.useMemo(() => {
+    return currentData.reduce((acc, curr) => acc + curr.count, 0)
+  }, [currentData])
 
   return (
     <Card className="flex h-fit basis-[400px] flex-col">
       <CardHeader className="pb-0">
-        <CardTitle>Phân loại</CardTitle>
+        <div className="flex items-center justify-between">
+          <CardTitle>Phân loại</CardTitle>
+          <Select value={selectedGroup} onValueChange={setSelectedGroup}>
+            <SelectTrigger className="w-[140px]">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {Object.entries(groupData).map(([key, _]) => (
+                <SelectItem key={key} value={key}>
+                  {getStatsLabel(key as RelevantKeys)}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
       </CardHeader>
       <CardContent className="flex-1 pb-5">
         <ChartContainer
@@ -65,9 +96,9 @@ export function ItemPieChart() {
               content={<ChartTooltipContent hideLabel />}
             />
             <Pie
-              data={chartData}
-              dataKey="visitors"
-              nameKey="browser"
+              data={currentData}
+              dataKey="count"
+              nameKey="group"
               innerRadius={60}
               strokeWidth={5}
             >
@@ -86,14 +117,14 @@ export function ItemPieChart() {
                           y={viewBox.cy}
                           className="fill-foreground text-3xl font-bold"
                         >
-                          {totalVisitors.toLocaleString()}
+                          {totalCount.toLocaleString()}
                         </tspan>
                         <tspan
                           x={viewBox.cx}
                           y={(viewBox.cy || 0) + 24}
                           className="fill-muted-foreground"
                         >
-                          Visitors
+                          Câu hỏi
                         </tspan>
                       </text>
                     )
