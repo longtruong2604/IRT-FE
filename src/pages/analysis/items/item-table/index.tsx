@@ -20,10 +20,13 @@ const ItemTable = () => {
   const { id } = useParams() as { id: string }
   const getItemsDataQuery = useGetItemsResultQuery(id)
 
-  const analyzedData = getItemsDataQuery.data?.data
+  const analyzedData = useMemo(
+    () => getItemsDataQuery.data?.data || {},
+    [getItemsDataQuery.data]
+  )
   const responseArray = useMemo(
     () =>
-      Object.entries(analyzedData!).map(([key, value]) => ({
+      Object.entries(analyzedData).map(([key, value]) => ({
         id: key,
         ...value,
       })),
@@ -43,11 +46,15 @@ const ItemTable = () => {
   )
 
   return (
-    <ReusableTable<(typeof responseArray)[number]>
-      columns={columns}
-      data={responseArray}
-      collapsibleContent={collapsibleContent}
-    />
+    <>
+      {responseArray ? (
+        <ReusableTable<(typeof responseArray)[number]>
+          columns={columns}
+          data={responseArray}
+          collapsibleContent={collapsibleContent}
+        />
+      ) : null}
+    </>
   )
 }
 export default ItemTable

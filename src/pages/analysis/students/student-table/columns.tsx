@@ -22,7 +22,6 @@ let groupOptionsCache: null | number[] = null
 
 const getGroupOptions = () => {
   if (groupOptionsCache === null) {
-    console.log('getGroupOptions')
     groupOptionsCache = [
       ...new Set(MOCK_DATA.map((student) => student.group)),
     ].sort()

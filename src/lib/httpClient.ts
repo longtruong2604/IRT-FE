@@ -12,8 +12,8 @@ import { normalizePath } from './utils'
  */
 export interface ApiResponse<T> {
   data: T
-  status: number
-  message?: string
+  code: number
+  message: string
 }
 
 /**
@@ -21,7 +21,8 @@ export interface ApiResponse<T> {
  */
 export interface ApiError {
   message: string
-  status?: number
+  code: number
+  error?: Record<string, unknown>
 }
 
 const httpClient = axios.create({
@@ -82,7 +83,7 @@ export const request = async <T>(
       : { 'Content-Type': 'application/json' }
 
   try {
-    const response: AxiosResponse<T> = await httpClient({
+    const response: AxiosResponse<ApiResponse<T>> = await httpClient({
       url: fullUrl,
       ...options,
       headers: {
@@ -95,16 +96,24 @@ export const request = async <T>(
 
     return {
       data: response.data.data,
-      status: response.status,
+      code: response.data.code,
       message: response.data.message,
     }
   } catch (error) {
-    console.error('API Error:', error)
-    const apiError: ApiError = {
-      message: (error as AxiosError).message,
-      status: (error as AxiosError).response?.status,
+    const AxiosError = error as AxiosError<ApiError>
+    if (!AxiosError.response) {
+      throw {
+        message: AxiosError.message,
+        code: 500,
+      }
+    } else {
+      const apiError: ApiError = {
+        message: AxiosError.message,
+        code: AxiosError.response.data.code,
+        error: AxiosError.response.data.error,
+      }
+      throw apiError
     }
-    throw apiError
   }
 }
 

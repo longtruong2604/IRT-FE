@@ -5,8 +5,8 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart'
+import { CTTGeneralDetails } from '@/services/analyzeService.ts'
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from 'recharts'
-import { MOCK_BARCHART_DATA } from './MOCK_DATA.ts'
 
 export const description = 'A bar chart'
 
@@ -16,7 +16,18 @@ const chartConfig = {
     color: 'var(--primary-600-base)',
   },
 } satisfies ChartConfig
-export function Component() {
+export function LargeBarChart({
+  data,
+}: {
+  data: CTTGeneralDetails['histogram']['score']
+}) {
+  const transformedArray = data.map((obj) => {
+    const [correctItem, numberOfStudent] = Object.entries(obj)[0]
+    return {
+      correctItem: parseFloat(correctItem),
+      numberOfStudent,
+    }
+  })
   return (
     <Card>
       <CardHeader>
@@ -27,7 +38,7 @@ export function Component() {
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig} className="h-[250px] w-full">
-          <BarChart accessibilityLayer data={MOCK_BARCHART_DATA}>
+          <BarChart accessibilityLayer data={transformedArray}>
             <CartesianGrid vertical={false} />
             <XAxis
               dataKey="correctItem"

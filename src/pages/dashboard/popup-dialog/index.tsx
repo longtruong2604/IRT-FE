@@ -85,11 +85,9 @@ export function PopupDialog() {
 
   const handleSubmit = form.handleSubmit(
     async (values: z.infer<typeof formSchema>) => {
-      console.log('hehe')
       if (cttAnalyzeMutation.isPending) return
       try {
         const res = await cttAnalyzeMutation.mutateAsync(values)
-        console.log(res)
         const id = res.data
         navigate(`/analysis/${id}`)
         // toast({ title: res.payload.message })

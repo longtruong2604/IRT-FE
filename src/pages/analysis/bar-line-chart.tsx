@@ -18,7 +18,20 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
-export function BarLineChart({ name, _data }: { name: string; _data: string }) {
+export function BarLineChart({
+  name,
+  data,
+}: {
+  name: string
+  data: Record<string, number>[]
+}) {
+  const transformedArray = data.map((obj) => {
+    const [correctItem, numberOfStudent] = Object.entries(obj)[0]
+    return {
+      correctItem: parseFloat(correctItem),
+      numberOfStudent,
+    }
+  })
   const navigate = useNavigate()
   return (
     <Card>
@@ -30,7 +43,7 @@ export function BarLineChart({ name, _data }: { name: string; _data: string }) {
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig} className="h-[200px] w-full">
-          <ComposedChart accessibilityLayer data={MOCK_LINE_BARCHART_DATA}>
+          <ComposedChart accessibilityLayer data={transformedArray}>
             <CartesianGrid vertical={false} />
             <XAxis
               dataKey="correctItem"

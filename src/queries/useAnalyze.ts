@@ -9,6 +9,7 @@ export const useCTTAnalyzeMutation = () => {
 }
 
 export const useGetItemsResultQuery = (id: string) => {
+  console.log('query')
   return useQuery({
     queryKey: ['ctt-items', id],
     queryFn: () => cttAnalyzeService.getResult(id),
@@ -22,10 +23,10 @@ export const useGetGeneralDetailsQuery = (id: string) => {
   })
 }
 
-export const useGetAverageDetalsQuery = (id: string) => {
-  console.log('query')
-  return useQuery({
-    queryKey: ['ctt-average', id],
-    queryFn: () => cttAnalyzeService.getAverageDetails(id),
-  })
-}
+// export const useGetAverageDetalsQuery = (id: string) => {
+//   console.log('query')
+//   return useQuery({
+//     queryKey: ['ctt-average', id],
+//     queryFn: () => cttAnalyzeService.getAverageDetails(id),
+//   })
+// }

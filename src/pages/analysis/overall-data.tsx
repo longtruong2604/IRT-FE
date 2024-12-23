@@ -1,6 +1,5 @@
-import { useGetGeneralDetailsQuery } from '@/queries/useAnalyze'
+import { CTTGeneralDetails } from '@/services/analyzeService'
 import { Ellipsis, NotebookText, SquareCheck, User } from 'lucide-react'
-import { useParams } from 'react-router-dom'
 
 const OverallDataItems = [
   {
@@ -23,13 +22,7 @@ const OverallDataItems = [
   },
 ] as const
 
-const OverallData = () => {
-  const { id } = useParams()
-  const getGeneralDetails = useGetGeneralDetailsQuery(id!)
-  const { data } = getGeneralDetails.data || {
-    data: { total_students: 0, total_questions: 0, total_option: 4 },
-  }
-
+const OverallData = ({ data }: { data: CTTGeneralDetails['general'] }) => {
   return (
     <div className="flex h-full flex-col justify-between rounded-xl border border-neutral-200 bg-white px-[20px] py-[30px] text-neutral-950 shadow dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-50">
       <div className="flex justify-between">
