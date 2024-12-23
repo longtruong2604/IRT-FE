@@ -7,7 +7,7 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { cn } from '@/lib/utils'
-import { OptionDetails } from '@/services/analyzeService'
+import { OptionDetails } from '@/types/ctt-analysis.type'
 import { useMemo } from 'react'
 
 export type DataType = {

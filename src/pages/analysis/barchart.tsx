@@ -5,7 +5,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart'
-import { CTTGeneralDetails } from '@/services/analyzeService.ts'
+import { CTTGeneralDetails } from '@/types/ctt-analysis.type'
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from 'recharts'
 
 export const description = 'A bar chart'

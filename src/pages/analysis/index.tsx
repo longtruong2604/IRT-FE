@@ -1,9 +1,10 @@
 import { Blocks, ChartNoAxesColumn, GraduationCap, Split } from 'lucide-react'
 import { BarLineChart } from './bar-line-chart'
-import { Component } from './barchart'
+import { LargeBarChart } from './barchart'
 import OverallData from './overall-data'
 import { useParams } from 'react-router-dom'
-import { useGetAverageDetalsQuery } from '@/queries/useAnalyze'
+import { useGetGeneralDetailsQuery } from '@/queries/useAnalyze'
+import { CTTGeneralDetails } from '@/types/ctt-analysis.type'
 
 const OverallStats = [
   {
@@ -32,15 +33,33 @@ const OverallStats = [
   },
 ] as const
 
-const Analysis = () => {
-  const { id } = useParams()
-  const getAverageQuery = useGetAverageDetalsQuery(id!)
-  const averageData = getAverageQuery.data?.data || {
+const placeholderData: CTTGeneralDetails = {
+  general: {
+    total_students: 0,
+    total_questions: 0,
+    total_option: 0,
+  },
+  histogram: {
+    score: [],
+    difficulty: [],
+    discrimination: [],
+    r_pbis: [],
+  },
+  average: {
+    average_score: 0,
     average_difficulty: 0,
     average_discrimination: 0,
     average_rpbis: 0,
-    average_score: 0,
-  }
+  },
+}
+
+const Analysis = () => {
+  const { id } = useParams()
+  const getGeneralDetails = useGetGeneralDetailsQuery(id!)
+  const {
+    data: { general, histogram, average },
+  } = getGeneralDetails.data ?? { data: placeholderData }
+
   return (
     <div className="m-10 grid grid-cols-12 gap-4">
       {OverallStats.map((stat, index) => (
@@ -56,7 +75,7 @@ const Analysis = () => {
           </div>
           <div className="flex flex-col gap-1">
             <div className="text-[24px] font-bold leading-[1.25] tracking-[0.2px]">
-              {averageData[stat.name]}
+              {average[stat.name]}
             </div>
             <div className="text-[14px] font-semibold leading-[1.6] tracking-[0.2px] text-muted-foreground">
               {stat.title}
@@ -66,21 +85,33 @@ const Analysis = () => {
       ))}
 
       <div className="col-span-8 rounded-lg bg-background">
-        <Component />
+        <LargeBarChart data={histogram.score} />
       </div>
 
       <div className="col-span-4 rounded-lg bg-background">
-        <OverallData />
+        <OverallData data={general} />
       </div>
 
       <div className="col-span-4 rounded-lg bg-background">
-        <BarLineChart name={'Biểu đồ phân bố độ phân cách'} _data={'_'} />
+        <BarLineChart
+          isLoading={getGeneralDetails.isLoading}
+          name={'Biểu đồ phân bố độ phân cách'}
+          data={histogram.discrimination}
+        />
       </div>
       <div className="col-span-4 rounded-lg bg-background">
-        <BarLineChart name={'Biểu đồ phân bố độ khó'} _data={'_'} />
+        <BarLineChart
+          isLoading={getGeneralDetails.isLoading}
+          name={'Biểu đồ phân bố độ khó'}
+          data={histogram.difficulty}
+        />
       </div>
       <div className="col-span-4 rounded-lg bg-background">
-        <BarLineChart name={'Biểu đồ phân bố hệ số tương quan'} _data={'_'} />
+        <BarLineChart
+          isLoading={getGeneralDetails.isLoading}
+          name={'Biểu đồ phân bố hệ số tương quan'}
+          data={histogram.r_pbis}
+        />
       </div>
     </div>
   )

@@ -6,6 +6,7 @@ import { useMemo } from 'react'
 import { useParams } from 'react-router-dom'
 import { columns } from './columns'
 import { MetricsTable } from './metric-table'
+import { Skeleton } from '@/components/ui/skeleton'
 
 const chartData = [
   { month: 'January', desktop: 186, mobile: 80 },
@@ -18,19 +19,16 @@ const chartData = [
 
 const ItemTable = () => {
   const { id } = useParams() as { id: string }
-  const getItemsDataQuery = useGetItemsResultQuery(id)
+  const { data: itemData, isLoading } = useGetItemsResultQuery(id)
 
-  const analyzedData = useMemo(
-    () => getItemsDataQuery.data?.data || {},
-    [getItemsDataQuery.data]
-  )
+  const data = itemData?.data || {}
   const responseArray = useMemo(
     () =>
-      Object.entries(analyzedData).map(([key, value]) => ({
+      Object.entries(data).map(([key, value]) => ({
         id: key,
         ...value,
       })),
-    [analyzedData]
+    [data]
   )
   const collapsibleContent = (row: number) => (
     <CollapsibleContent asChild>
@@ -47,13 +45,15 @@ const ItemTable = () => {
 
   return (
     <>
-      {responseArray ? (
+      {isLoading ? (
+        <Skeleton className="h-[600px] w-[1030px] rounded-full" />
+      ) : (
         <ReusableTable<(typeof responseArray)[number]>
           columns={columns}
           data={responseArray}
           collapsibleContent={collapsibleContent}
         />
-      ) : null}
+      )}
     </>
   )
 }

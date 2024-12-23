@@ -72,7 +72,7 @@ export default function Component() {
                 dataKey="desktop"
                 fill="var(--color-desktop)"
               >
-                {mockData.map((entry, index) => (
+                {mockData.map((_, index) => (
                   <circle
                     key={`desktop-${index}`}
                     cx={0}

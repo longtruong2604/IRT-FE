@@ -14,7 +14,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { OptionDetails } from '@/services/analyzeService'
+import { OptionDetails } from '@/types/ctt-analysis.type'
 
 type ColumnsType = {
   difficulty: number

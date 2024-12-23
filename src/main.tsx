@@ -1,25 +1,28 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Layout from './components/layout/main-layout/index.tsx'
+
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ThemeProvider } from './components/theme-provider.tsx'
 import './index.css'
 import Analysis from './pages/analysis/index.tsx'
+import Items from './pages/analysis/items/index.tsx'
+import Students from './pages/analysis/students/student-table/index.tsx'
 import { ResetPasswordPage } from './pages/authorization/reset-password.tsx'
 import { SignInPage } from './pages/authorization/sign-in.tsx'
 import { SignUpPage } from './pages/authorization/sign-up.tsx'
 import { VerifyMailPage } from './pages/authorization/verify-mail.tsx'
 import DashBoard from './pages/dashboard/index.tsx'
-import Items from './pages/analysis/items/index.tsx'
-import Students from './pages/analysis/students/student-table/index.tsx'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       refetchOnWindowFocus: false,
       retry: false,
+      refetchOnMount: false,
     },
   },
 })
@@ -56,6 +59,7 @@ createRoot(document.getElementById('root')!).render(
       <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
         <RouterProvider router={router} />
       </ThemeProvider>
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   </StrictMode>
 )

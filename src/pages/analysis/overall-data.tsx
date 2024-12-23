@@ -1,4 +1,4 @@
-import { CTTGeneralDetails } from '@/services/analyzeService'
+import { CTTGeneralDetails } from '@/types/ctt-analysis.type'
 import { Ellipsis, NotebookText, SquareCheck, User } from 'lucide-react'
 
 const OverallDataItems = [
