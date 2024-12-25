@@ -12,7 +12,7 @@ export const description = 'A bar chart'
 
 const chartConfig = {
   numberOfStudent: {
-    label: 'numberOfStudent',
+    label: 'Số lượng thí sinh:',
     color: 'var(--primary-600-base)',
   },
 } satisfies ChartConfig
@@ -59,7 +59,7 @@ export function LargeBarChart({
             />
             <Bar
               dataKey="numberOfStudent"
-              fill="#2563EB52"
+              fill={'#2993FF'}
               radius={8}
               activeBar={{ fill: 'var(--primary-600-base)' }}
             />

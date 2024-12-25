@@ -131,7 +131,7 @@ export function ReusableTable<T>({
       </CardContent>
     </Card>
   ) : (
-    <Card className="flex grow">
+    <Card className="grow">
       <CardContent>
         <div className="flex items-center py-4">
           {searchBy && (
@@ -253,8 +253,8 @@ export function ReusableTable<T>({
               </SelectContent>
             </Select>
             <div>
-              trong{' '}
-              <strong>{table.getPrePaginationRowModel().rows.length}</strong>{' '}
+              trong
+              <strong>{table.getPrePaginationRowModel().rows.length}</strong>
               kết quả
             </div>
           </div>

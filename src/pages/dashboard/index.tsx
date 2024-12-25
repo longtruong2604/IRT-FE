@@ -8,14 +8,14 @@ import {
 } from '@/components/ui/card'
 import { Dialog, DialogTrigger } from '@/components/ui/dialog'
 import { PopupDialog } from './popup-dialog'
-import banner from '/image.png'
+import banner from '/image.jpeg'
 import MockDescriptionImage from '/screen-01.png'
 
 const CardData = [
   {
     title: 'CTT',
     content:
-      'Phương pháp phân tích dựa trên lý thuyết trắc nghiệm cổ điển (Classical Test Theory)',
+      'Phân tích dựa trên lý thuyết trắc nghiệm cổ điển, tập trung vào đánh giá độ khó và độ phân cách của câu hỏi để đưa ra phân tích hiệu quả.',
     action: () => {
       console.log('CTT analysis started')
     },
@@ -23,7 +23,7 @@ const CardData = [
   {
     title: 'Rasch',
     content:
-      'Phương pháp phân tích dựa trên lý thuyết trắc nghiệm cổ điển (Classical Test Theory)',
+      'Phân tích dựa trên lý thuyết Rasch, đơn giản hơn IRT, chỉ xét mối quan hệ giữa năng lực và độ khó mà không có các yếu tố đoán mò hay phân cách.',
     action: () => {
       console.log('Rasch analysis started')
     },
@@ -31,7 +31,7 @@ const CardData = [
   {
     title: 'IRT',
     content:
-      'Phương pháp phân tích dựa trên lý thuyết trắc nghiệm cổ điển (Classical Test Theory)',
+      'Phân tích dựa trên lý thuyết trắc nghiệm hiện đại, tập trung vào đánh giá mối quan hệ giữa năng lực thí sinh và độ khó của câu hỏi.',
     action: () => {
       console.log('IRT analysis started')
     },
@@ -45,11 +45,11 @@ const DashBoard = () => {
         <div className="Banner flex items-center justify-between">
           <div className="flex basis-[600px] flex-col gap-2">
             <h1 className="text-[48px] font-extrabold">
-              We make item analysis easy.
+              Phân tích dễ dàng. Hiểu sâu hơn.
             </h1>
             <p className="text-2xl text-muted-foreground">
-              All the tools you’ll need to be more productive and work smarter
-              with documents.
+              Giải pháp tối ưu cho việc phân tích dữ liệu trắc nghiệm của bạn
+              một cách nhanh chóng.
             </p>
           </div>
           <div className="relative flex grow items-center justify-center py-[70px]">
@@ -62,10 +62,12 @@ const DashBoard = () => {
         <div className="flex flex-col gap-[60px]">
           <div className="flex flex-col items-center gap-3">
             <h2 className="text-[36px] font-bold leading-[1.25] tracking-[0.2px]">
-              Khám phá các model có sẵn
+              Khám phá các phương pháp có sẵn
             </h2>
-            <p className="text-[20px] font-normal leading-[1.25] tracking-[0.2px]">
-              lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum{' '}
+            <p className="w-[700px] text-center text-[18px] font-normal leading-[1.25] tracking-[0.2px] text-[#464646]">
+              Từ lý thuyết trắc nghiệm cổ điển đến hiện đại,hệ thống cung cấp
+              giải pháp phân tích tối ưu cho mọi nhu cầu đánh giá câu hỏi và
+              năng lực thí sinh.
             </p>
           </div>
           <div className="flex justify-center gap-5">
@@ -98,10 +100,12 @@ const DashBoard = () => {
             <h2 className="text-[36px] font-bold leading-[1.25] tracking-[0.2px]">
               Phân tích trắc nghiệm là gì?
             </h2>
-            <p className="max-w-[700px] text-center text-[20px] font-normal leading-[1.25] tracking-[0.2px]">
-              lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-              ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum psum lorem
-              ipsum lorem ipsum
+            <p className="max-w-[700px] text-center text-[20px] font-normal leading-[1.25] tracking-[0.2px] text-[#464646]">
+              Phân tích trắc nghiệm là quá trình đánh giá chất lượng câu hỏi
+              trắc nghiệm để đảm bảo chúng đo lường chính xác năng lực của thí
+              sinh. Quá trình này tập trung vào việc xác định độ khó, khả năng
+              phân cách, độ tin cậy, và mức độ phù hợp của từng câu hỏi với mục
+              tiêu kiểm tra, giúp tối ưu hóa hiệu quả bài thi.
             </p>
           </div>
           <div className="flex items-center gap-[100px]">
@@ -109,7 +113,7 @@ const DashBoard = () => {
               <h3 className="text-[40px] font-bold leading-normal">
                 Automated Reports & Widget Alerts
               </h3>
-              <p className="font-roboto text-[18px] font-normal leading-[1.5] text-[#464646]">
+              <p className="text-[18px] font-normal leading-[1.5] text-[#464646]">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 Elementum nisi aliquet volutpat pellentesque volutpat est.
                 Sapien in etiam vitae nibh nunc mattis imperdiet sed nullam.
@@ -132,7 +136,7 @@ const DashBoard = () => {
               <h3 className="text-[40px] font-bold leading-normal">
                 Fully customizable to address your needs{' '}
               </h3>
-              <p className="font-roboto text-[18px] font-normal leading-[1.5] text-[#464646]">
+              <p className="text-[18px] font-normal leading-[1.5] text-[#464646]">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 Elementum nisi aliquet volutpat pellentesque volutpat est.
                 Sapien in etiam vitae nibh nunc mattis imperdiet sed nullam.
