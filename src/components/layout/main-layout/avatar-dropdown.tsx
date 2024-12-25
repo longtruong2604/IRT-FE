@@ -15,12 +15,12 @@ export const AvatarDropdown = () => (
       <div className="flex gap-2">
         <Avatar>
           <AvatarImage src="https://github.com/shadcn.png" />
-          <AvatarFallback>CN</AvatarFallback>
+          <AvatarFallback>BD</AvatarFallback>
         </Avatar>
         <div className="flex items-center">
           <div className="flex flex-col items-start">
-            <p className="text-sm font-bold">Angela L.</p>
-            <p className="text-xs text-muted-foreground">Project Manager</p>
+            <p className="text-sm font-bold">T.N Bảo Duy</p>
+            <p className="text-xs text-muted-foreground">Thạc sĩ KHMT</p>
           </div>
           <ChevronDown className="text-[#94A3B8]" />
         </div>

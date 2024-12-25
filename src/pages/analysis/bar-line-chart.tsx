@@ -13,8 +13,8 @@ import { useNavigate } from 'react-router-dom'
 export const description = 'A bar chart'
 
 const chartConfig = {
-  numberOfStudent: {
-    label: 'numberOfStudent',
+  numberOfQuestion: {
+    label: 'Số lượng câu hỏi:',
     // color: 'var(--primary-600-base)',
   },
 } satisfies ChartConfig
@@ -34,10 +34,10 @@ export function BarLineChart({
       return []
     }
     return data.map((obj) => {
-      const [correctItem, numberOfStudent] = Object.entries(obj)[0]
+      const [correctItem, numberOfQuestion] = Object.entries(obj)[0]
       return {
         correctItem: parseFloat(correctItem),
-        numberOfStudent,
+        numberOfQuestion,
       }
     })
   }, [data])
@@ -65,7 +65,7 @@ export function BarLineChart({
               />
               <YAxis
                 width={30}
-                dataKey="numberOfStudent"
+                dataKey="numberOfQuestion"
                 tickLine={false}
                 tickMargin={10}
                 axisLine={false}
@@ -75,7 +75,7 @@ export function BarLineChart({
                 content={<ChartTooltipContent hideLabel />}
               />
               <Bar
-                dataKey="numberOfStudent"
+                dataKey="numberOfQuestion"
                 radius={8}
                 // activeBar={{ fill: 'var(--primary-600-base)' }}
                 onClick={() => navigate('/analysis/line-chart')}
@@ -95,7 +95,7 @@ export function BarLineChart({
               </Bar>
               {/* <Line
                 type="monotone"
-                dataKey="numberOfStudent"
+                dataKey="numberOfQuestion"
                 stroke="#8884d8"
                 strokeWidth={2}
                 dot={{ r: 1.5 }}

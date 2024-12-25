@@ -33,13 +33,25 @@ export const columns: ColumnDef<ColumnsType>[] = [
     accessorKey: 'id',
     header: ({ column }) => {
       return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        >
-          Câu
-          <ArrowUpDown />
-        </Button>
+        <div className="flex items-center justify-center">
+          <HoverCard>
+            <HoverCardTrigger asChild>
+              <Button
+                variant="ghost"
+                onClick={() =>
+                  column.toggleSorting(column.getIsSorted() === 'asc')
+                }
+                className="relative flex items-center justify-center" // Padding to make space for the arrow
+              >
+                <span className="absolute -right-2 flex items-center">
+                  <ArrowUpDown />
+                </span>
+                Câu
+              </Button>
+            </HoverCardTrigger>
+            <HoverCardContent>Heheheh</HoverCardContent>
+          </HoverCard>
+        </div>
       )
     },
     size: 150,
@@ -78,13 +90,25 @@ export const columns: ColumnDef<ColumnsType>[] = [
     size: 200,
     header: ({ column }) => {
       return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        >
-          Độ khó
-          <ArrowUpDown />
-        </Button>
+        <div className="flex items-center justify-center">
+          <HoverCard>
+            <HoverCardTrigger asChild>
+              <Button
+                variant="ghost"
+                className="relative flex items-center justify-center"
+                onClick={() =>
+                  column.toggleSorting(column.getIsSorted() === 'asc')
+                }
+              >
+                Độ khó
+                <span className="absolute -right-2 flex items-center">
+                  <ArrowUpDown />
+                </span>
+              </Button>
+            </HoverCardTrigger>
+            <HoverCardContent>Heheheh</HoverCardContent>
+          </HoverCard>
+        </div>
       )
     },
     cell: ({ row }) => (
@@ -96,13 +120,25 @@ export const columns: ColumnDef<ColumnsType>[] = [
     size: 200,
     header: ({ column }) => {
       return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        >
-          Độ phân cách
-          <ArrowUpDown />
-        </Button>
+        <div className="flex items-center justify-center">
+          <HoverCard>
+            <HoverCardTrigger asChild>
+              <Button
+                variant="ghost"
+                className="relative flex items-center justify-center"
+                onClick={() =>
+                  column.toggleSorting(column.getIsSorted() === 'asc')
+                }
+              >
+                Độ phân cách
+                <span className="absolute -right-2 flex items-center">
+                  <ArrowUpDown />
+                </span>
+              </Button>
+            </HoverCardTrigger>
+            <HoverCardContent>Có nghĩa là gì</HoverCardContent>
+          </HoverCard>
+        </div>
       )
     },
     cell: ({ row }) => (
@@ -121,27 +157,37 @@ export const columns: ColumnDef<ColumnsType>[] = [
         { label: 'Quá khó', value: { min: 0.7, max: 1 } },
       ]
       return (
-        <div className="flex items-center justify-center">
-          <p>Độ khó</p>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="outline-none">
-                <ArrowUpDown />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-30">
-              {/* Dropdown items for each difficulty option */}
-              {difficultyOptions.map((item) => (
-                <DropdownMenuItem
-                  key={item.label}
-                  onClick={() => column.setFilterValue(item.value)}
-                >
-                  <span>{item.label}</span>
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
+        <DropdownMenu>
+          <HoverCard>
+            <div className="flex items-center justify-center">
+              <HoverCardTrigger asChild>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    className="relative flex items-center justify-center"
+                  >
+                    <p>Độ khó</p>
+                    <span className="absolute -right-2 flex items-center">
+                      <ArrowUpDown />
+                    </span>
+                  </Button>
+                </DropdownMenuTrigger>
+              </HoverCardTrigger>
+              <DropdownMenuContent className="w-30">
+                {/* Dropdown items for each difficulty option */}
+                {difficultyOptions.map((item) => (
+                  <DropdownMenuItem
+                    key={item.label}
+                    onClick={() => column.setFilterValue(item.value)}
+                  >
+                    <span>{item.label}</span>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </div>
+            <HoverCardContent>Có nghĩa là gì</HoverCardContent>
+          </HoverCard>
+        </DropdownMenu>
       )
     },
     size: 200,
@@ -198,27 +244,37 @@ export const columns: ColumnDef<ColumnsType>[] = [
       ]
 
       return (
-        <div className="flex items-center justify-center">
-          <p>Phân cách</p>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="outline-none">
-                <ArrowUpDown />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-30">
-              {/* Dropdown items for each discrimination option */}
-              {discriminationOptions.map((item) => (
-                <DropdownMenuItem
-                  key={item.label}
-                  onClick={() => column.setFilterValue(item.value)}
-                >
-                  <span>{item.label}</span>
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
+        <DropdownMenu>
+          <HoverCard>
+            <div className="flex items-center justify-center">
+              <HoverCardTrigger asChild>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    className="relative flex items-center justify-center"
+                  >
+                    <p>Phân cách</p>
+                    <span className="absolute -right-2 flex items-center">
+                      <ArrowUpDown />
+                    </span>
+                  </Button>
+                </DropdownMenuTrigger>
+              </HoverCardTrigger>
+              <DropdownMenuContent className="w-30">
+                {/* Dropdown items for each discrimination option */}
+                {discriminationOptions.map((item) => (
+                  <DropdownMenuItem
+                    key={item.label}
+                    onClick={() => column.setFilterValue(item.value)}
+                  >
+                    <span>{item.label}</span>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </div>
+            <HoverCardContent>Có nghĩa là gì</HoverCardContent>
+          </HoverCard>
+        </DropdownMenu>
       )
     },
     size: 200,
@@ -260,6 +316,36 @@ export const columns: ColumnDef<ColumnsType>[] = [
       }
       return false // Default case: no match
     },
+  },
+  {
+    accessorKey: 'r_pbis',
+    size: 200,
+    header: ({ column }) => {
+      return (
+        <HoverCard>
+          <div className="flex items-center justify-center">
+            <HoverCardTrigger asChild>
+              <Button
+                variant="ghost"
+                className="relative flex items-center justify-center"
+                onClick={() =>
+                  column.toggleSorting(column.getIsSorted() === 'asc')
+                }
+              >
+                Hệ số r_pbis
+                <span className="absolute -right-2 flex items-center">
+                  <ArrowUpDown />
+                </span>
+              </Button>
+            </HoverCardTrigger>
+            <HoverCardContent>Có nghĩa là gì</HoverCardContent>
+          </div>
+        </HoverCard>
+      )
+    },
+    cell: ({ row }) => (
+      <div className="text-center">{row.getValue('r_pbis')}</div>
+    ),
   },
   {
     id: 'actions',

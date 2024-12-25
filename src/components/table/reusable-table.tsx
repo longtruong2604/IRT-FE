@@ -34,6 +34,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import Spinner from '@/components/ui/spinner'
 import {
   Table,
   TableBody,
@@ -78,10 +79,12 @@ export function ReusableTable<T>({
   columns,
   data,
   collapsibleContent,
+  isPending,
 }: {
   searchBy?: (keyof T)[]
   columns: ColumnDef<T>[]
   data: T[]
+  isPending?: boolean
   collapsibleContent?: (_row: number) => JSX.Element
 }) {
   const [sorting, setSorting] = React.useState<SortingState>([])
@@ -121,8 +124,14 @@ export function ReusableTable<T>({
     initialState: { pagination: { pageSize: data.length / Math.pow(2, 3) } },
   })
 
-  return (
-    <Card className="">
+  return isPending ? (
+    <Card className="flex h-full items-center justify-center">
+      <CardContent>
+        <Spinner />
+      </CardContent>
+    </Card>
+  ) : (
+    <Card className="flex grow">
       <CardContent>
         <div className="flex items-center py-4">
           {searchBy && (
@@ -249,15 +258,17 @@ export function ReusableTable<T>({
               kết quả
             </div>
           </div>
-          <div>
-            <AutoPagination
-              page={table.getState().pagination.pageIndex + 1}
-              pageSize={table.getPageCount()}
-              isLink={false}
-              // pathname="/analysis/items"
-              onClick={(pageIndex) => table.setPageIndex(pageIndex - 1)}
-            />
-          </div>
+          {data.length ? (
+            <div>
+              <AutoPagination
+                page={table.getState().pagination.pageIndex + 1}
+                pageSize={table.getPageCount()}
+                isLink={false}
+                // pathname="/analysis/items"
+                onClick={(pageIndex) => table.setPageIndex(pageIndex - 1)}
+              />
+            </div>
+          ) : null}
         </div>
       </CardContent>
     </Card>

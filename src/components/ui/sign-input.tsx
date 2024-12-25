@@ -34,7 +34,7 @@ const IconInputLead: React.FC<IconInputLeadProps> = ({
 export function SignIn() {
   return (
     <>
-      <div className="mb-5 flex h-screen min-h-full flex-1 flex-col items-center justify-center px-6 py-12 lg:px-8">
+      <div className="flex h-screen min-h-full flex-1 flex-col items-center justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <h2 className="mb-1 mt-10 text-left text-2xl/9 font-bold tracking-tight text-titleAuthor">
             Sign In to your account
@@ -79,10 +79,11 @@ export function SignIn() {
 
             <div className="mb-5 mt-5">
               <Button
-                type="submit"
+                // type="submit"
+
                 className="hover:bg-blueCustom-500 focus-visible:outline-blueCustom-600 flex h-12 w-full justify-center rounded-md bg-blueCustom px-3 py-1.5 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
               >
-                Sign in
+                <Link to={'/'}>Sign in</Link>
               </Button>
               <h4 className="mt-3 text-center text-gray-600">
                 Don't have any accounts?

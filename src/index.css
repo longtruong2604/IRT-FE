@@ -49,6 +49,10 @@
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
+    --chart-A: 200, 70%, 50%; /* Blue */
+    --chart-B: 340, 65%, 55%; /* Red */
+    --chart-C: 120, 60%, 45%; /* Green */
+    --chart-D: 50, 70%, 60%; /* Yellow */
     --radius: 0.5rem;
   }
 

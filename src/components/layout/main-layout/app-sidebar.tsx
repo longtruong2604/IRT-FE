@@ -23,6 +23,7 @@ import { Logo } from '@/components/ui/logo'
 import { DarkModeToggle } from './dark-mode-toggle'
 
 export function AppSidebar() {
+  // const [menuItems, setMenuItems] = useState<typeof MenuItems>(MenuItems)
   const { id } = useParams() // Extract the dynamic ID from the URL
   const [activeLink, setActiveLink] =
     useState<(typeof MenuItems)[number]['value']>()
@@ -36,7 +37,7 @@ export function AppSidebar() {
       </SidebarHeader>
       <SidebarContent>
         <SidebarMenu className="gap-2">
-          {MenuItems.map((item) =>
+          {MenuItems.filter((item) => item.isVisible).map((item) =>
             item.children ? (
               <Collapsible key={item.title}>
                 <SidebarGroup className="p-0">

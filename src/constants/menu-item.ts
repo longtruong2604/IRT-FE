@@ -1,4 +1,4 @@
-import { ChartBar, History, Home, ListOrdered, Users } from 'lucide-react'
+import { ChartBar, History, Home, ListOrdered, User, Users } from 'lucide-react'
 
 export const MenuItems = [
   {
@@ -6,24 +6,28 @@ export const MenuItems = [
     url: '/',
     icon: Home,
     value: 'home',
+    isVisible: true,
   },
   {
     title: 'Phân tích',
     url: '/analysis/:id',
     icon: ChartBar,
     value: 'analysis',
+    isVisible: true,
     children: [
       {
         title: 'Thí sinh',
         url: '/students',
         icon: Users,
         value: 'students',
+        isVisible: true,
       },
       {
         title: 'Câu hỏi',
         url: '/items',
         icon: ListOrdered,
         value: 'items',
+        isVisible: true,
       },
     ],
   },
@@ -32,11 +36,13 @@ export const MenuItems = [
     url: '/history',
     icon: History,
     value: 'history',
+    isVisible: true,
   },
-  // {
-  //   title: 'Hướng dẫn',
-  //   url: '/tutorial',
-  //   icon: User,
-  //   value: 'tutorial',
-  // },
+  {
+    title: 'Hướng dẫn',
+    url: '/tutorial',
+    icon: User,
+    value: 'tutorial',
+    isVisible: true,
+  },
 ]

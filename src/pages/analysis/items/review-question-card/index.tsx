@@ -1,5 +1,3 @@
-import { X } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card'
@@ -9,12 +7,10 @@ import { Badge } from '@/components/ui/badge'
 import { getStatsLabel } from '@/lib/utils'
 
 type ReviewQuestionsCardProps = {
-  onClose?: () => void
   onQuestionClick?: (id: string) => void
 }
 
 export default function ReviewQuestionsCard({
-  onClose,
   onQuestionClick,
 }: ReviewQuestionsCardProps) {
   const questions: ReviewQuestion[] = [
@@ -36,18 +32,12 @@ export default function ReviewQuestionsCard({
 
   return (
     <Card className="">
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-7">
-        <CardTitle className="text-xl font-bold">Câu hỏi cần xem lại</CardTitle>
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={onClose}
-          className="h-8 w-8"
-        >
-          <X className="h-4 w-4" />
-        </Button>
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
+        <CardTitle className="text-l font-semibold">
+          Câu hỏi cần xem lại
+        </CardTitle>
       </CardHeader>
-      <CardContent className="grid gap-6">
+      <CardContent className="grid gap-3">
         {questions.map((question) => (
           <div
             key={question.id}
@@ -68,7 +58,7 @@ export default function ReviewQuestionsCard({
             </div>
             <Button
               onClick={() => onQuestionClick?.(question.id)}
-              variant="ghost"
+              variant="outline"
               className="ml-2"
             >
               Xem

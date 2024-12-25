@@ -76,7 +76,7 @@ export function PopupDialog() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       projectName: '',
-      numberOfChoices: 1,
+      numberOfChoices: 4,
       numberOfGroup: 5,
       groupPercentage: 0.27,
       correlationRpbis: 'item-total-correlation',
@@ -89,6 +89,7 @@ export function PopupDialog() {
       try {
         const res = await cttAnalyzeMutation.mutateAsync(values)
         const id = res.data
+        // MenuItems.find((item) => item.value === 'analysis').isVisible = true
         navigate(`/analysis/${id}`)
         // toast({ title: res.payload.message })
         // reset()
@@ -272,8 +273,12 @@ export function PopupDialog() {
             />
             {/* <UploadedFilesCard uploadedFiles={uploadedFiles} /> */}
             <DialogFooter>
-              <Button type="submit" className="w-full bg-primary-600-base">
-                Submit
+              <Button
+                type="submit"
+                className="w-full bg-primary-600-base"
+                disabled={cttAnalyzeMutation.isPending}
+              >
+                {cttAnalyzeMutation.isPending ? 'Loading...' : 'Submit'}
               </Button>
             </DialogFooter>
           </form>

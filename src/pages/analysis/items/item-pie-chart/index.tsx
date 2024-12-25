@@ -67,10 +67,10 @@ export function ItemPieChart() {
   }, [currentData])
 
   return (
-    <Card className="flex h-fit basis-[400px] flex-col">
+    <Card className="flex h-fit flex-col">
       <CardHeader className="pb-0">
         <div className="flex items-center justify-between">
-          <CardTitle>Phân loại</CardTitle>
+          <CardTitle className="text-l font-semibold">Phân loại</CardTitle>
           <Select value={selectedGroup} onValueChange={setSelectedGroup}>
             <SelectTrigger className="w-[140px]">
               <SelectValue />
