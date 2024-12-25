@@ -34,6 +34,8 @@ import {
 } from '@/components/ui/select'
 import { useCTTAnalyzeMutation } from '@/queries/useAnalyze'
 import { useNavigate } from 'react-router-dom'
+import { useApp } from '@/components/context-provider'
+import { toast } from 'sonner'
 
 const fileSchema = z.array(
   z
@@ -71,6 +73,7 @@ const correlationOptions = [
 export function PopupDialog() {
   const navigate = useNavigate()
   const cttAnalyzeMutation = useCTTAnalyzeMutation()
+  const { setHasCreatedAnalysis } = useApp()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -89,9 +92,9 @@ export function PopupDialog() {
       try {
         const res = await cttAnalyzeMutation.mutateAsync(values)
         const id = res.data
-        // MenuItems.find((item) => item.value === 'analysis').isVisible = true
+        setHasCreatedAnalysis(true)
         navigate(`/analysis/${id}`)
-        // toast({ title: res.payload.message })
+        toast(res.message)
         // reset()
       } catch (error) {
         console.error(error)
@@ -271,7 +274,6 @@ export function PopupDialog() {
                 </FormItem>
               )}
             />
-            {/* <UploadedFilesCard uploadedFiles={uploadedFiles} /> */}
             <DialogFooter>
               <Button
                 type="submit"

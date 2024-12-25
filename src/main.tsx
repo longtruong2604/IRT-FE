@@ -16,6 +16,8 @@ import { SignInPage } from './pages/authorization/sign-in.tsx'
 import { SignUpPage } from './pages/authorization/sign-up.tsx'
 import { VerifyMailPage } from './pages/authorization/verify-mail.tsx'
 import DashBoard from './pages/dashboard/index.tsx'
+import { Toaster } from './components/ui/sonner.tsx'
+import { AnalysisProvider } from './components/context-provider.tsx'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -57,8 +59,11 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
       <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-        <RouterProvider router={router} />
+        <AnalysisProvider>
+          <RouterProvider router={router} />
+        </AnalysisProvider>
       </ThemeProvider>
+      <Toaster />
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   </StrictMode>

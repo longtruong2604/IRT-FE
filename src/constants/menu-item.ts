@@ -37,6 +37,7 @@ export const MenuItems = [
     icon: History,
     value: 'history',
     isVisible: true,
+    comingSoon: true,
   },
   {
     title: 'Hướng dẫn',
@@ -44,5 +45,6 @@ export const MenuItems = [
     icon: User,
     value: 'tutorial',
     isVisible: true,
+    comingSoon: true,
   },
 ]
