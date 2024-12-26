@@ -49,7 +49,7 @@ export const columns: ColumnDef<ColumnsType>[] = [
                 Câu
               </Button>
             </HoverCardTrigger>
-            <HoverCardContent>Heheheh</HoverCardContent>
+            <HoverCardContent>Câu hỏi</HoverCardContent>
           </HoverCard>
         </div>
       )
@@ -106,7 +106,7 @@ export const columns: ColumnDef<ColumnsType>[] = [
                 </span>
               </Button>
             </HoverCardTrigger>
-            <HoverCardContent>Heheheh</HoverCardContent>
+            <HoverCardContent>Độ khó:...</HoverCardContent>
           </HoverCard>
         </div>
       )
@@ -146,15 +146,15 @@ export const columns: ColumnDef<ColumnsType>[] = [
     ),
   },
   {
-    accessorKey: 'difficulty',
+    accessorKey: 'difficulty_group',
     header: ({ column }) => {
       const difficultyOptions = [
         { label: 'Tất cả', value: null }, // No filter, show all
-        { label: 'Quá dễ', value: { min: 0, max: 0.1 } },
-        { label: 'Dễ', value: { min: 0.1, max: 0.3 } },
-        { label: 'Trung bình', value: { min: 0.3, max: 0.5 } },
-        { label: 'Khó', value: { min: 0.5, max: 0.7 } },
-        { label: 'Quá khó', value: { min: 0.7, max: 1 } },
+        { label: 'Quá Khó', value: { min: 0, max: 0.25 } },
+        { label: 'Khó', value: { min: 0.25, max: 0.5 } },
+        // { label: 'Trung bình', value: { min: 0.3, max: 0.5 } },
+        { label: 'Dễ', value: { min: 0.5, max: 0.75 } },
+        { label: 'Quá Dễ', value: { min: 0.75, max: 1 } },
       ]
       return (
         <DropdownMenu>
@@ -194,22 +194,20 @@ export const columns: ColumnDef<ColumnsType>[] = [
     cell: ({ row }) => {
       const value = row.getValue('difficulty') as number
       let displayValue, variant: BadgeProps['variant']
-      if (value < 0.1) {
-        displayValue = 'Quá dễ'
-        variant = 'veryEasy'
-      } else if (value < 0.3) {
-        displayValue = 'Dễ'
-        variant = 'easy'
+      if (value < 0.25) {
+        displayValue = 'Quá Khó'
+        variant = 'veryHard'
       } else if (value < 0.5) {
-        displayValue = 'Trung bình'
-        variant = 'medium'
-      } else if (value < 0.7) {
         displayValue = 'Khó'
         variant = 'hard'
+      } else if (value < 0.75) {
+        displayValue = 'Dễ'
+        variant = 'easy'
       } else {
-        displayValue = 'Quá khó'
-        variant = 'veryHard'
+        displayValue = 'Quá Dễ'
+        variant = 'veryEasy'
       }
+
       return (
         <HoverCard>
           <HoverCardTrigger className="flex items-center justify-center">
@@ -220,6 +218,7 @@ export const columns: ColumnDef<ColumnsType>[] = [
       )
     },
     filterFn: (row, _, value) => {
+      console.log('row', row)
       const pDifficulty = row.getValue('difficulty') as number
       if (!value) {
         return true // No filter, include all rows
@@ -233,14 +232,15 @@ export const columns: ColumnDef<ColumnsType>[] = [
     },
   },
   {
-    accessorKey: 'discrimination',
+    accessorKey: 'discrimination_group',
     header: ({ column }) => {
       // Define the discrimination categories and their numeric ranges
       const discriminationOptions = [
         { label: 'Tất cả', value: null }, // No filter, show all
-        { label: 'Kém', value: { min: 0, max: 0.2 } },
-        { label: 'Tốt', value: { min: 0.2, max: 0.7 } },
-        { label: 'Tạm được', value: { min: 0.7, max: 1 } },
+        { label: 'Kém', value: { min: -5, max: 0.1 } },
+        { label: 'Tạm được', value: { min: 0.1, max: 0.3 } },
+        { label: 'Tốt', value: { min: 0.3, max: 1 } },
+        // { label: 'Tạm được', value: { min: 0.7, max: 1 } },
       ]
 
       return (
@@ -283,15 +283,15 @@ export const columns: ColumnDef<ColumnsType>[] = [
       let displayValue, variant: BadgeProps['variant']
 
       // Categorize discrimination based on the numeric value of discrimination
-      if (value < 0.2) {
+      if (value < 0.1) {
         displayValue = 'Kém'
         variant = 'veryHard'
-      } else if (value <= 0.7) {
-        displayValue = 'Tốt'
-        variant = 'medium'
-      } else {
+      } else if (value >= 0.1 && value < 0.3) {
         displayValue = 'Tạm được'
         variant = 'hard'
+      } else if (value >= 0.3) {
+        displayValue = 'Tốt'
+        variant = 'medium'
       }
 
       return (

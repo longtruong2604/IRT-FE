@@ -23,13 +23,13 @@ const CellRestrain: Partial<
 > = {
   selected_by: {
     label: 'Số lượng',
-    first: 0.2,
-    second: 0.7,
+    first: 0,
+    second: 1000,
   },
   top_selected: {
     label: 'Nhóm cao',
-    first: 0.2,
-    second: 0.7,
+    first: 0,
+    second: 1000,
   },
   ratio: {
     label: 'Tỉ lệ',
@@ -38,8 +38,8 @@ const CellRestrain: Partial<
   },
   bottom_selected: {
     label: 'Nhóm thấp',
-    first: 0.2,
-    second: 0.7,
+    first: 0,
+    second: 1000,
   },
   discrimination: {
     label: 'Độ p.cách',
@@ -47,9 +47,9 @@ const CellRestrain: Partial<
     second: 0.7,
   },
   r_pbis: {
-    label: 'r_pbis',
-    first: 0.2,
-    second: 0.7,
+    label: 'Hệ số R_PBIS',
+    first: 0,
+    second: 10,
   },
 } as const
 
@@ -59,7 +59,7 @@ const CellItem = (key: keyof OptionDetails, value: number) => {
   if (value < first || value > second) {
     className = 'text-red-500'
   } else {
-    className = 'text-green-500'
+    className = 'text-foreground'
   }
 
   return (

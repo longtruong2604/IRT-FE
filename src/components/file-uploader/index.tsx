@@ -92,7 +92,7 @@ export function FileUploader(props: FileUploaderProps) {
       'application/vnd.ms-excel': [],
       'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': [],
     },
-    maxSize = 1024 * 1024 * 2,
+    maxSize = 1024 * 1024 * 1,
     maxFileCount = 1,
     multiple = false,
     disabled = false,
@@ -223,14 +223,14 @@ export function FileUploader(props: FileUploaderProps) {
                     </div>
                     <div className="flex flex-col gap-px">
                       <p className="font-medium text-muted-foreground">
-                        Drag {`'n'`} drop files here, or click to select files
+                        Kéo thả tệp vào đây hoặc nhấn để chọn tệp
                       </p>
                       <p className="text-sm text-muted-foreground/70">
-                        You can upload
+                        Bạn có thể tải lên
                         {maxFileCount > 1
-                          ? ` ${maxFileCount === Infinity ? 'multiple' : maxFileCount}
-                        files (up to ${formatBytes(maxSize)} each)`
-                          : ` a file with ${formatBytes(maxSize)}`}
+                          ? ` ${maxFileCount === Infinity ? 'nhiều tệp' : maxFileCount}
+      tệp (mỗi tệp tối đa ${formatBytes(maxSize)})`
+                          : ` một tệp trong giới hạn ${formatBytes(maxSize)}`}
                       </p>
                     </div>
                   </div>

@@ -23,10 +23,12 @@ export function BarLineChart({
   name,
   data,
   isLoading,
+  type,
 }: {
   name: string
   data: Record<string, number>[] | undefined
   isLoading: boolean
+  type: 'difficulty' | 'discrimination' | 'r_pbis'
 }) {
   const navigate = useNavigate()
   const transformedArray = useMemo(() => {
@@ -34,13 +36,46 @@ export function BarLineChart({
       return []
     }
     return data.map((obj) => {
-      const [correctItem, numberOfQuestion] = Object.entries(obj)[0]
+      const [index, numberOfQuestion] = Object.entries(obj)[0]
+      const correctItem = parseFloat(index)
+
+      // Determine the group based on the index and the type
+      let group = ''
+      if (type === 'difficulty') {
+        if (correctItem < 0.25) {
+          group = 'Very Bad' // Quá Khó
+        } else if (correctItem < 0.5) {
+          group = 'Bad' // Khó
+        } else if (correctItem < 0.75) {
+          group = 'Good' // Dễ
+        } else {
+          group = 'Very Good' // Quá Dễ
+        }
+      } else if (type === 'discrimination') {
+        if (correctItem < 0.1) {
+          group = 'Very Bad' // Kém
+        } else if (correctItem < 0.3) {
+          group = 'Average' // Tạm được
+        } else {
+          group = 'Very Good' // Tốt
+        }
+      } else if (type === 'r_pbis') {
+        if (correctItem < 0.2) {
+          group = 'Very Bad' // Kém
+        } else if (correctItem <= 0.7) {
+          group = 'Good' // Tốt
+        } else {
+          group = 'Average' // Tạm được
+        }
+      }
+
       return {
-        correctItem: parseFloat(correctItem),
+        correctItem,
         numberOfQuestion,
+        group,
       }
     })
-  }, [data])
+  }, [data, type])
 
   if (isLoading) {
     return <Skeleton className="h-[20px] w-[100px] rounded-full" />
@@ -77,22 +112,26 @@ export function BarLineChart({
               <Bar
                 dataKey="numberOfQuestion"
                 radius={8}
-                // activeBar={{ fill: 'var(--primary-600-base)' }}
                 onClick={() => navigate('/analysis/line-chart')}
               >
-                {transformedArray.map((_, index) => (
+                {transformedArray.map((item, index) => (
                   <Cell
                     key={`cell-${index}`}
                     fill={
-                      index < 14
-                        ? 'var(--very-good-text)'
-                        : index < 16
-                          ? 'var(--average-text)'
-                          : 'var(--bad-text'
+                      item.group === 'Very Bad'
+                        ? 'var(--very-bad-text)' // Red
+                        : item.group === 'Bad'
+                          ? 'var(--bad-text)' // Orange
+                          : item.group === 'Average'
+                            ? 'var(--average-text)' // Blue
+                            : item.group === 'Good'
+                              ? 'var(--good-text)' // Light Blue
+                              : 'var(--very-good-text)' // Green
                     }
                   />
                 ))}
               </Bar>
+
               {/* <Line
                 type="monotone"
                 dataKey="numberOfQuestion"

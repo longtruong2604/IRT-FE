@@ -23,7 +23,7 @@ const CardData = [
   {
     title: 'Rasch',
     content:
-      'Phân tích dựa trên lý thuyết Rasch, đơn giản hơn IRT, chỉ xét mối quan hệ giữa năng lực và độ khó mà không có các yếu tố đoán mò hay phân cách.',
+      'Phân tích theo mô hình Rasch, đơn giản hơn IRT, chỉ xét mối quan hệ giữa năng lực và độ khó, không có các yếu tố đoán mò hay độ phân cách.',
     action: () => {
       console.log('Rasch analysis started')
     },

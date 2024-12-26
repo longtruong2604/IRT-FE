@@ -108,6 +108,7 @@ const Analysis = () => {
           isLoading={getGeneralDetails.isLoading}
           name={'Biểu đồ phân bố độ phân cách'}
           data={histogram.discrimination}
+          type="discrimination"
         />
       </div>
       <div className="col-span-4 rounded-lg bg-background">
@@ -115,6 +116,7 @@ const Analysis = () => {
           isLoading={getGeneralDetails.isLoading}
           name={'Biểu đồ phân bố độ khó'}
           data={histogram.difficulty}
+          type="difficulty"
         />
       </div>
       <div className="col-span-4 rounded-lg bg-background">
@@ -122,6 +124,7 @@ const Analysis = () => {
           isLoading={getGeneralDetails.isLoading}
           name={'Biểu đồ phân bố hệ số tương quan'}
           data={histogram.r_pbis}
+          type="r_pbis"
         />
       </div>
     </div>

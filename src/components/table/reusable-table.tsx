@@ -253,8 +253,8 @@ export function ReusableTable<T>({
               </SelectContent>
             </Select>
             <div>
-              trong
-              <strong>{table.getPrePaginationRowModel().rows.length}</strong>
+              trong{' '}
+              <strong>{table.getPrePaginationRowModel().rows.length}</strong>{' '}
               kết quả
             </div>
           </div>

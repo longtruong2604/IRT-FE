@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { Label, Legend, Pie, PieChart } from 'recharts'
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -17,6 +16,7 @@ import {
 } from '@/components/ui/chart'
 import { getStatsLabel } from '@/lib/utils'
 import { RelevantKeys } from '@/types/ctt-analysis.type'
+import { useState } from 'react'
 
 const groupData: Record<
   RelevantKeys,
@@ -58,13 +58,13 @@ const chartConfig = {
 } satisfies ChartConfig
 
 export function ItemPieChart() {
-  const [selectedGroup, setSelectedGroup] = React.useState('difficulty')
+  const [selectedGroup, setSelectedGroup] = useState('difficulty')
 
   const currentData = groupData[selectedGroup as keyof typeof groupData]
 
-  const totalCount = React.useMemo(() => {
-    return currentData.reduce((acc, curr) => acc + curr.count, 0)
-  }, [currentData])
+  // const totalCount = React.useMemo(() => {
+  //   return currentData.reduce((acc, curr) => acc + curr.count, 0)
+  // }, [currentData])
 
   return (
     <Card className="flex h-fit flex-col">
@@ -117,7 +117,8 @@ export function ItemPieChart() {
                           y={viewBox.cy}
                           className="fill-foreground text-3xl font-bold"
                         >
-                          {totalCount.toLocaleString()}
+                          {/* {totalCount.toLocaleString()} */}
+                          60
                         </tspan>
                         <tspan
                           x={viewBox.cx}

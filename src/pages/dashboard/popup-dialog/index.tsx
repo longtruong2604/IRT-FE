@@ -226,7 +226,7 @@ export function PopupDialog() {
                   <FormControl>
                     <FileUploader
                       maxFileCount={1}
-                      maxSize={4 * 1024 * 1024}
+                      // maxSize={4 * 1024 * 1024}
                       value={field.value}
                       onValueChange={field.onChange}
                     />
@@ -245,7 +245,7 @@ export function PopupDialog() {
                   <FormControl>
                     <FileUploader
                       maxFileCount={1}
-                      maxSize={4 * 1024 * 1024}
+                      // maxSize={4 * 1024 * 1024}
                       value={field.value}
                       onValueChange={field.onChange}
                     />
@@ -264,7 +264,7 @@ export function PopupDialog() {
                   <FormControl>
                     <FileUploader
                       maxFileCount={1}
-                      maxSize={4 * 1024 * 1024}
+                      // maxSize={4 * 1024 * 1024}
                       value={field.value}
                       onValueChange={field.onChange}
                     />
