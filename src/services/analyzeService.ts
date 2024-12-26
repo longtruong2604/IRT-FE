@@ -24,7 +24,9 @@ export const cttAnalyzeService = {
       questionSetFile
     )
     const formData = new FormData()
-    formData.append('file', answerFile[0])
+    formData.append('exam_file', questionFile[0])
+    formData.append('result_file', answerFile[0])
+    formData.append('question_bank_file', questionSetFile[0])
 
     return http.post<CTTAnalysisResult>('/ctt/analyze', formData, {
       headers: {
