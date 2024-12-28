@@ -121,7 +121,7 @@ export function ReusableTable<T>({
       columnVisibility,
       rowSelection,
     },
-    initialState: { pagination: { pageSize: data.length / Math.pow(2, 3) } },
+    initialState: { pagination: { pageSize: 10 } },
   })
 
   return isPending ? (
@@ -229,27 +229,18 @@ export function ReusableTable<T>({
           <div className="flex flex-1 items-center gap-2 py-4 text-xs text-muted-foreground">
             <div>Hiển thị</div>
             <Select
-              defaultValue={Math.floor(
-                table.getPrePaginationRowModel().rows.length / Math.pow(2, 3)
-              ).toString()}
+              defaultValue={'10'}
               onValueChange={(e) => table.setPageSize(+e)}
             >
               <SelectTrigger className="w-fit">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                {Array.from({ length: 4 }, (_, index) =>
-                  Math.floor(
-                    table.getPrePaginationRowModel().rows.length /
-                      Math.pow(2, index)
-                  )
-                )
-                  .reverse()
-                  .map((value, index) => (
-                    <SelectItem key={index} value={value.toString()}>
-                      {value}
-                    </SelectItem>
-                  ))}
+                {[10, 20, 50, 100].map((value) => (
+                  <SelectItem key={value} value={value.toString()}>
+                    {value}
+                  </SelectItem>
+                ))}
               </SelectContent>
             </Select>
             <div>

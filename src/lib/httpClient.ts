@@ -126,14 +126,14 @@ const http = {
   },
   post<Response>(
     url: string,
-    body: any,
+    body: unknown,
     options?: Omit<AxiosRequestConfig, 'method' | 'url'>
   ) {
     return request<Response>('POST', url, { ...options, data: body })
   },
   put<Response>(
     url: string,
-    body: any,
+    body: unknown,
     options?: Omit<AxiosRequestConfig, 'method' | 'url'>
   ) {
     return request<Response>('PUT', url, { ...options, data: body })

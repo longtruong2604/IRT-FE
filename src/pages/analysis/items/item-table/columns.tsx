@@ -8,11 +8,12 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { OptionDetails } from '@/types/ctt-analysis.type'
+import { OptionDetails, QuestionDetails } from '@/types/ctt-analysis.type'
 import { ColumnDef } from '@tanstack/react-table'
 import { ArrowUpDown, ChevronDown } from 'lucide-react'
 
 type ColumnsType = {
+  content: QuestionDetails
   difficulty: number
   difficulty_category: string
   discrimination: number

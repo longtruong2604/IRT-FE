@@ -34,21 +34,14 @@ const ItemTable = () => {
           <td colSpan={7} className="rounded-md border p-5">
             <div className="flex flex-col gap-4">
               <div className="text-lg font-semibold text-gray-800">
-                This is the content for the question that is being displayed.
+                {responseArray[row].content.question}
               </div>
               <div className="grid grid-cols-4 gap-4">
-                <div className="rounded-md border border-blue-200 bg-blue-50 p-3 text-center font-medium text-blue-600 shadow-sm">
-                  A. This is the content for the answer that is being displayed.
-                </div>
-                <div className="rounded-md border border-blue-200 bg-blue-50 p-3 text-center font-medium text-blue-600 shadow-sm">
-                  B. This is the content for the answer that is being displayed.
-                </div>
-                <div className="rounded-md border border-blue-200 bg-blue-50 p-3 text-center font-medium text-blue-600 shadow-sm">
-                  C. This is the content for the answer that is being displayed.
-                </div>
-                <div className="rounded-md border border-blue-200 bg-blue-50 p-3 text-center font-medium text-blue-600 shadow-sm">
-                  D. This is the content for the answer that is being displayed.
-                </div>
+                {responseArray[row].content.option.map((option) => (
+                  <div className="rounded-md border border-blue-200 bg-blue-50 p-3 text-center font-medium text-blue-600 shadow-sm">
+                    {option}
+                  </div>
+                ))}
               </div>
             </div>
           </td>
@@ -65,8 +58,6 @@ const ItemTable = () => {
               </div>
             </div>
           </td>
-          {/* <td colSpan={4}>
-          </td> */}
         </tr>
       </>
     </CollapsibleContent>

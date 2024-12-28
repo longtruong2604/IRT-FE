@@ -1,5 +1,6 @@
 export type CTTAnalysisResult = {
   [key: string]: {
+    content: QuestionDetails
     difficulty: number
     difficulty_category: string
     discrimination: number
@@ -9,6 +10,11 @@ export type CTTAnalysisResult = {
       [optionKey: string]: OptionDetails
     }
   }
+}
+
+export type QuestionDetails = {
+  question: string
+  option: string[]
 }
 
 export type CTTGeneralDetails = Readonly<{

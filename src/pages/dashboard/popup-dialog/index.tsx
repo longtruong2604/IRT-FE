@@ -63,7 +63,6 @@ const formSchema = z.object({
     .min(1, { message: 'Hệ số tương quan không được để trống.' }),
   questionFile: fileSchema,
   answerFile: fileSchema,
-  questionSetFile: fileSchema,
 })
 
 export type CTTAnalysisRequest = z.infer<typeof formSchema>

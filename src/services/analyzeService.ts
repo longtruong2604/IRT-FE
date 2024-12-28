@@ -5,28 +5,23 @@ import { CTTAnalysisResult, CTTGeneralDetails } from '@/types/ctt-analysis.type'
 export const cttAnalyzeService = {
   analyze({
     projectName,
-    numberOfChoices,
     numberOfGroup,
     groupPercentage,
     correlationRpbis,
     questionFile,
     answerFile,
-    questionSetFile,
   }: CTTAnalysisRequest): Promise<ApiResponse<CTTAnalysisResult>> {
     console.log(
       projectName,
-      numberOfChoices,
       numberOfGroup,
       groupPercentage,
       correlationRpbis,
       questionFile,
-      answerFile,
-      questionSetFile
+      answerFile
     )
     const formData = new FormData()
     formData.append('exam_file', questionFile[0])
     formData.append('result_file', answerFile[0])
-    formData.append('question_bank_file', questionSetFile[0])
 
     return http.post<CTTAnalysisResult>('/ctt/analyze', formData, {
       headers: {
