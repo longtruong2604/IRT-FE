@@ -9,7 +9,7 @@ import {
 } from '@/components/ui/table'
 import { cn } from '@/lib/utils'
 import { OptionDetails } from '@/types/ctt-analysis.type'
-import { useMemo } from 'react'
+import { ReactNode, useMemo } from 'react'
 
 export type DataType = {
   name: keyof typeof CellRestrain
@@ -20,35 +20,76 @@ export type DataType = {
 }[]
 
 const CellRestrain: Partial<
-  Record<keyof OptionDetails, { label: string; first: number; second: number }>
+  Record<
+    keyof OptionDetails,
+    {
+      label: string
+      first: number
+      second: number
+      tooltips: string | ReactNode
+    }
+  >
 > = {
   selected_by: {
     label: 'Số lượng',
+    tooltips: <span>Số lượng thí sinh chọn.</span>,
     first: 0,
     second: 1000,
   },
   top_selected: {
     label: 'Nhóm cao',
+    tooltips: (
+      <div className="w-[300px]">
+        Số lượng thí sinh trong nhóm cao chọn. Đáp án sẽ được chọn nhiều hơn các
+        lựa chọn khác.
+      </div>
+    ),
     first: 0,
     second: 1000,
   },
   ratio: {
     label: 'Tỉ lệ',
+    tooltips: (
+      <div className="w-[300px]">
+        Tỉ lệ thí sinh chọn trên tổng số thí sinh. Đáp án sẽ có tỉ lệ cao hơn
+        các lựa chọn khác.
+      </div>
+    ),
     first: 0.2,
     second: 0.7,
   },
   bottom_selected: {
     label: 'Nhóm thấp',
+    tooltips: (
+      <div className="w-[300px]">
+        Số lượng thí sinh trong nhóm thấp chọn. Đáp án sẽ được chọn nhiều hơn
+        các lựa chọn khác
+      </div>
+    ),
     first: 0,
     second: 1000,
   },
   discrimination: {
     label: 'Độ p.cách',
+    tooltips: (
+      <div className="w-[300px]">
+        Độ phân cách của từng đáp án, tính bằng hiệu số của tỉ lệ nhóm cao chọn
+        và tỉ lệ nhóm thấp chọn. Đáp án sẽ có độ phân cách dương, còn các lựa
+        chọn khác sẽ âm.
+      </div>
+    ),
     first: 0.2,
     second: 0.7,
   },
   r_pbis: {
     label: 'Hệ số R_PBIS',
+    tooltips: (
+      <div className="w-[300px]">
+        Hệ số tương quan giữa điểm số của câu và điểm bài. Càng cao có nghĩa là
+        chọn lựa chọn này sẽ giúp thí sinh có điểm cao, và ngược lại. Đáp án sẽ
+        có hệ số dương, còn các lựa chọn khác sẽ âm.
+      </div>
+    ),
     first: 0,
     second: 10,
   },
@@ -107,7 +148,9 @@ export function MetricsTable({
         {tranposedData.map((item) => (
           <TableRow key={item.name}>
             <TableCell className="font-medium">
-              {CellRestrain[item.name]?.label}
+              <HoverCardText content={CellRestrain[item.name]?.tooltips}>
+                {CellRestrain[item.name]?.label}
+              </HoverCardText>
             </TableCell>
             {CellItem(item.name, item.A)}
             {CellItem(item.name, item.B)}

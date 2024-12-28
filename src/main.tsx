@@ -6,7 +6,9 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Layout from './components/layout/main-layout/index.tsx'
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { AnalysisProvider } from './components/context-provider.tsx'
 import { ThemeProvider } from './components/theme-provider.tsx'
+import { Toaster } from './components/ui/sonner.tsx'
 import './index.css'
 import Analysis from './pages/analysis/index.tsx'
 import Items from './pages/analysis/items/index.tsx'
@@ -16,8 +18,6 @@ import { SignInPage } from './pages/authorization/sign-in.tsx'
 import { SignUpPage } from './pages/authorization/sign-up.tsx'
 import { VerifyMailPage } from './pages/authorization/verify-mail.tsx'
 import DashBoard from './pages/dashboard/index.tsx'
-import { Toaster } from './components/ui/sonner.tsx'
-import { AnalysisProvider } from './components/context-provider.tsx'
 
 const queryClient = new QueryClient({
   defaultOptions: {

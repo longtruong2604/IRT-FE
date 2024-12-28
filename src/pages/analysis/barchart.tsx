@@ -1,4 +1,3 @@
-import HoverCardIcon from '@/components/reusable-hover-with-icon'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import {
   ChartConfig,
@@ -34,11 +33,7 @@ export function LargeBarChart({
       <CardHeader>
         <CardTitle className="flex gap-1 text-[16px] font-bold leading-[1.5] tracking-[0.2px]">
           Biểu đồ phân bố điểm
-          <HoverCardIcon v- size={12}>
-            Biểu đồ phân bố
-          </HoverCardIcon>
         </CardTitle>
-        {/* <CardDescription>January - June 2024</CardDescription> */}
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig} className="h-[250px] w-full">
@@ -70,14 +65,6 @@ export function LargeBarChart({
           </BarChart>
         </ChartContainer>
       </CardContent>
-      {/* <CardFooter className="flex-col items-start gap-2 text-sm">
-        <div className="flex gap-2 font-medium leading-none">
-          Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-        </div>
-        <div className="leading-none text-muted-foreground">
-          Showing total visitors for the last 6 months
-        </div>
-      </CardFooter> */}
     </Card>
   )
 }

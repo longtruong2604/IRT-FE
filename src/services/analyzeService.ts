@@ -1,5 +1,5 @@
 import http, { ApiResponse } from '@/lib/httpClient'
-import { CTTAnalysisRequest } from '@/pages/dashboard/popup-dialog'
+import { CTTAnalysisRequest } from '@/pages/dashboard/create-analysis-form'
 import { CTTAnalysisResult, CTTGeneralDetails } from '@/types/ctt-analysis.type'
 
 export const cttAnalyzeService = {

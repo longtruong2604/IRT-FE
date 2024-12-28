@@ -7,7 +7,7 @@ import {
 } from '@/components/ui/chart'
 import { Bar, CartesianGrid, Cell, ComposedChart, XAxis, YAxis } from 'recharts'
 import { Skeleton } from '@/components/ui/skeleton'
-import { useMemo } from 'react'
+import { ReactNode, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import HoverCardIcon from '@/components/reusable-hover-with-icon'
 
@@ -28,7 +28,7 @@ const groupColors = {
 }
 
 const groupTranslations = {
-  'Very Bad': 'Rất kém',
+  'Very Bad': 'Kém',
   Bad: 'Kém',
   Average: 'Trung bình',
   Good: 'Tốt',
@@ -64,11 +64,13 @@ export function BarLineChart({
   name,
   data,
   isLoading,
+  tootlTip,
   type,
 }: {
   name: string
   data: Record<string, number>[] | undefined
   isLoading: boolean
+  tootlTip: string | ReactNode
   type: 'difficulty' | 'discrimination' | 'r_pbis'
 }) {
   const navigate = useNavigate()
@@ -125,7 +127,7 @@ export function BarLineChart({
         <CardHeader>
           <CardTitle className="flex gap-1 text-[16px] font-bold leading-[1.5] tracking-[0.2px]">
             {name}
-            <HoverCardIcon size={12}>Biểu đồ phân bố</HoverCardIcon>
+            <HoverCardIcon size={12}>{tootlTip}</HoverCardIcon>
           </CardTitle>
         </CardHeader>
         <CardContent>

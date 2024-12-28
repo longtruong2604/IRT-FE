@@ -7,7 +7,7 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { Dialog, DialogTrigger } from '@/components/ui/dialog'
-import { PopupDialog } from './popup-dialog'
+import { CreateAnalysisForm } from './create-analysis-form'
 import banner from '/image.jpeg'
 import MockDescriptionImage from '/screen-01.png'
 
@@ -146,7 +146,7 @@ const DashBoard = () => {
           </div>
         </div>
       </div>
-      <PopupDialog />
+      <CreateAnalysisForm />
     </Dialog>
   )
 }

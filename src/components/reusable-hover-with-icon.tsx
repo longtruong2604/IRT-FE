@@ -17,12 +17,14 @@ const HoverCardIcon = ({
     <HoverCard>
       <HoverCardTrigger asChild>
         <span
-          className={`text-gray-500 transition-colors duration-200 hover:text-blue-500 ${className}`}
+          className={`text-gray-500 transition-colors duration-200 hover:text-blue-500`}
         >
           {icon ? icon : <CircleHelp size={size} />}
         </span>
       </HoverCardTrigger>
-      <HoverCardContent className="text-[14px] font-semibold leading-[1.6] tracking-[0.2px] text-muted-foreground">
+      <HoverCardContent
+        className={`z-[100] overflow-visible text-[14px] font-normal leading-[1.6] tracking-[0.2px] ${className}`}
+      >
         {children}
       </HoverCardContent>
     </HoverCard>

@@ -15,7 +15,9 @@ const HoverCardText = ({
       <HoverCardTrigger asChild>
         <div className={className}>{children}</div>
       </HoverCardTrigger>
-      <HoverCardContent>{content}</HoverCardContent>
+      <HoverCardContent className="w-fit !font-normal">
+        {content}
+      </HoverCardContent>
     </HoverCard>
   )
 }

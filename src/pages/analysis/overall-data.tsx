@@ -1,12 +1,7 @@
 import HoverCardIcon from '@/components/reusable-hover-with-icon'
 import { CTTGeneralDetails } from '@/types/ctt-analysis.type'
-import {
-  CircleHelp,
-  Ellipsis,
-  NotebookText,
-  SquareCheck,
-  User,
-} from 'lucide-react'
+import { MathJax, MathJaxContext } from 'better-react-mathjax'
+import { Ellipsis, NotebookText, SquareCheck, User } from 'lucide-react'
 
 const OverallDataItems = [
   {
@@ -41,14 +36,70 @@ const OverallData = ({ data }: { data: CTTGeneralDetails['general'] }) => {
 
       <div className="flex flex-col items-center gap-1">
         <p className="flex gap-1 text-[26px] font-bold leading-[1.25] tracking-[0.2px] text-blue-600">
-          -0.6483
-          <HoverCardIcon>Độ phân cách của câu hỏi</HoverCardIcon>
+          0.754
+          <HoverCardIcon>
+            {(() => {
+              const KR20 = 0.754
+              if (KR20 < 0.7) {
+                return 'Bài kiểm tra có độ tin cậy thấp. Nên xem xét cải thiện các câu hỏi để tăng tính nhất quán và khả năng đo lường năng lực thí sinh.'
+              } else if (KR20 < 0.8) {
+                return 'Bài kiểm tra có độ tin cậy ở mức trung bình. Có thể chấp nhận được nhưng cần cải thiện thêm để đảm bảo đánh giá chính xác hơn.'
+              } else {
+                return 'Bài kiểm tra có độ tin cậy cao, các câu hỏi phù hợp và đo lường năng lực thí sinh hiệu quả.'
+              }
+            })()}
+          </HoverCardIcon>
         </p>
 
         <h2 className="flex gap-1 text-[12px] font-normal leading-[1.6] text-muted-foreground">
           Độ tin cậy (Kuder Richardson 20)
-          <HoverCardIcon icon={<CircleHelp size={11} />}>
-            Độ phân cách của câu hỏi
+          <HoverCardIcon size={11} className="w-[450px]">
+            <MathJaxContext>
+              <div className="flex flex-col gap-2">
+                <p>
+                  Độ tin cậy Kuder Richardson 20 (KR20) đánh giá mức độ tin cậy
+                  của bài kiểm tra:
+                </p>
+                <MathJax className="text-center">
+                  {
+                    '\\(KR20 = \\frac{K}{K-1} \\left[ 1 - \\frac{\\sum p_i q_i}{\\sigma^2} \\right]\\)'
+                  }
+                </MathJax>
+                <p>Trong đó:</p>
+                <ul>
+                  <li>
+                    <MathJax>
+                      {'\\(K\\)'}: Số lượng câu hỏi trong bài kiểm tra.
+                    </MathJax>
+                  </li>
+                  <li>
+                    <MathJax>
+                      {'\\(p_i\\)'}: Tỷ lệ thí sinh trả lời đúng câu hỏi thứ \(
+                      i \).
+                    </MathJax>
+                  </li>
+                  <li>
+                    <MathJax>
+                      {'\\(q_i = 1 - p_i\\)'}: Tỷ lệ thí sinh trả lời sai câu
+                      hỏi thứ \( i \).
+                    </MathJax>
+                  </li>
+                  <li>
+                    <MathJax>
+                      {'\\(\\sigma^2\\)'}: Phương sai của tổng điểm bài kiểm
+                      tra.
+                    </MathJax>
+                  </li>
+                </ul>
+              </div>
+              <p className="mt-2">
+                Giá trị cao: Bài kiểm tra có độ tin cậy cao, các câu hỏi nhất
+                quán trong việc đo lường cùng một kiến thức hoặc kỹ năng.
+                <br />
+                Giá trị thấp: Bài kiểm tra có độ tin cậy thấp, các câu hỏi không
+                đồng nhất hoặc không cùng đo lường một mục tiêu cụ thể.
+              </p>
+            </MathJaxContext>
           </HoverCardIcon>
         </h2>
       </div>

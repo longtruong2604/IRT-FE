@@ -71,18 +71,24 @@ const correlationOptions = [
   {
     label: 'Điểm câu so với tổng điểm bài',
     value: 'item-total-correlation',
+    tooltips:
+      'Tương quan giữa điểm câu hỏi và tổng điểm bài, phản ánh mức độ câu hỏi đóng góp vào tổng điểm.',
   },
   {
     label: 'Điểm câu so với tổng điểm bài (loại trừ điểm câu)',
     value: 'item-total-excluded',
+    tooltips:
+      'Tương quan giữa điểm câu hỏi và tổng điểm bài (loại trừ điểm câu), giúp đánh giá khách quan hơn.',
   },
   {
     label: 'Điểm câu so với tổng điểm đã hiệu chỉnh (Iteman)',
     value: 'item-total-adjusted-iteman',
+    tooltips:
+      'Tương quan dựa trên tổng điểm đã hiệu chỉnh theo Iteman, tăng độ chính xác và giảm sai lệch.',
   },
 ]
 
-export function PopupDialog() {
+export function CreateAnalysisForm() {
   const navigate = useNavigate()
   const cttAnalyzeMutation = useCTTAnalyzeMutation()
   const { setHasCreatedAnalysis } = useApp()
@@ -161,8 +167,9 @@ export function PopupDialog() {
                   <FormItem className="w-full">
                     <FormLabel className="flex gap-1">
                       Số nhóm thí sinh
-                      <HoverCardIcon size={11}>
-                        Tên dự án là tên gợi nhớ cho dự án của bạn
+                      <HoverCardIcon size={11} className="w-[300px]">
+                        Số nhóm thí sinh sẽ được phân chia dựa trên điểm số. Mục
+                        đích phục vụ cho việc phân tích biểu đồ câu hỏi CTT.
                       </HoverCardIcon>
                     </FormLabel>
                     <FormControl>
@@ -192,8 +199,10 @@ export function PopupDialog() {
                   <FormItem>
                     <FormLabel className="flex gap-1">
                       Tỷ lệ nhóm cao, nhóm thấp
-                      <HoverCardIcon size={11}>
-                        Tên dự án là tên gợi nhớ cho dự án của bạn
+                      <HoverCardIcon size={11} className="w-[300px]">
+                        Tỷ lệ phần trăm thí sinh được chọn vào nhóm cao và nhóm
+                        thấp dựa trên điểm số. Nhóm cao gồm thí sinh có điểm cao
+                        nhất theo tỷ lệ được chọn, và nhóm thấp ngược lại.
                       </HoverCardIcon>
                     </FormLabel>
                     <FormControl>
@@ -231,10 +240,15 @@ export function PopupDialog() {
                           <SelectValue placeholder="Vui lòng chọn loại tương quan câu - bài" />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent>
+                      <SelectContent className="overflow-visible">
                         {correlationOptions.map((option) => (
                           <SelectItem value={option.value} key={option.value}>
-                            {option.label}
+                            <div className="flex gap-1">
+                              {option.label}
+                              <HoverCardIcon size={11} className="w-[300px]">
+                                {option.tooltips}
+                              </HoverCardIcon>
+                            </div>
                           </SelectItem>
                         ))}
                       </SelectContent>
@@ -252,8 +266,10 @@ export function PopupDialog() {
                     <FormLabel className="flex justify-between">
                       <div className="flex gap-1">
                         Upload tập câu hỏi
-                        <HoverCardIcon size={11}>
-                          Tên dự án là tên gợi nhớ cho dự án của bạn
+                        <HoverCardIcon size={11} className="w-[300px]">
+                          Tệp câu hỏi bao gồm mã đề thi, nội dung câu hỏi, các
+                          lựa chọn (A, B, C, D), và đáp án đúng. Định dạng tệp
+                          chấp nhận: CSV hoặc Excel.
                         </HoverCardIcon>
                       </div>
                       <Link
@@ -288,8 +304,10 @@ export function PopupDialog() {
                     <FormLabel className="flex justify-between">
                       <div className="flex gap-1">
                         Upload tập kết quả
-                        <HoverCardIcon size={11}>
-                          Tên dự án là tên gợi nhớ cho dự án của bạn
+                        <HoverCardIcon size={11} className="w-[300px]">
+                          Tệp kết quả bao gồm câu trả lời của thí sinh, họ tên,
+                          mã số sinh viên (hoặc định danh), và mã đề thi. Định
+                          dạng tệp chấp nhận: CSV hoặc Excel.
                         </HoverCardIcon>
                       </div>
                       <Link
