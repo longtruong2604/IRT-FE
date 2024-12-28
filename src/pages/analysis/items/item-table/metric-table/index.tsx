@@ -1,3 +1,4 @@
+import HoverCardText from '@/components/reuseable-hover-card'
 import {
   Table,
   TableBody,
@@ -64,7 +65,7 @@ const CellItem = (key: keyof OptionDetails, value: number) => {
 
   return (
     <TableCell className={cn('text-center font-semibold', className)}>
-      {value}
+      <HoverCardText content={value}>{value}</HoverCardText>
     </TableCell>
   )
 }

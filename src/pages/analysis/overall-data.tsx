@@ -1,10 +1,12 @@
-import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from '@/components/ui/hover-card'
+import HoverCardIcon from '@/components/reusable-hover-with-icon'
 import { CTTGeneralDetails } from '@/types/ctt-analysis.type'
-import { Ellipsis, NotebookText, SquareCheck, User } from 'lucide-react'
+import {
+  CircleHelp,
+  Ellipsis,
+  NotebookText,
+  SquareCheck,
+  User,
+} from 'lucide-react'
 
 const OverallDataItems = [
   {
@@ -36,20 +38,21 @@ const OverallData = ({ data }: { data: CTTGeneralDetails['general'] }) => {
         </h1>
         <Ellipsis />
       </div>
-      <HoverCard>
-        <HoverCardTrigger>
-          <div className="flex flex-col items-center gap-1">
-            <p className="text-[26px] font-bold leading-[1.25] tracking-[0.2px] text-blue-600">
-              -0.6483
-            </p>
 
-            <h2 className="text-[12px] font-normal leading-[1.6] text-muted-foreground">
-              Độ tin cậy (Kuder Richardson 20)
-            </h2>
-          </div>
-        </HoverCardTrigger>
-        <HoverCardContent>Có nghĩa là gì</HoverCardContent>
-      </HoverCard>
+      <div className="flex flex-col items-center gap-1">
+        <p className="flex gap-1 text-[26px] font-bold leading-[1.25] tracking-[0.2px] text-blue-600">
+          -0.6483
+          <HoverCardIcon>Độ phân cách của câu hỏi</HoverCardIcon>
+        </p>
+
+        <h2 className="flex gap-1 text-[12px] font-normal leading-[1.6] text-muted-foreground">
+          Độ tin cậy (Kuder Richardson 20)
+          <HoverCardIcon icon={<CircleHelp size={11} />}>
+            Độ phân cách của câu hỏi
+          </HoverCardIcon>
+        </h2>
+      </div>
+
       <div className="flex gap-4 rounded-lg">
         {OverallDataItems.map((item, index) => (
           <div

@@ -131,7 +131,7 @@ export function ReusableTable<T>({
       </CardContent>
     </Card>
   ) : (
-    <Card className="grow">
+    <Card className="grow cursor-default">
       <CardContent>
         <div className="flex items-center py-4">
           {searchBy && (

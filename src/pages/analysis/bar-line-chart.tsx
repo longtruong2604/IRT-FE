@@ -6,18 +6,59 @@ import {
   ChartTooltipContent,
 } from '@/components/ui/chart'
 import { Bar, CartesianGrid, Cell, ComposedChart, XAxis, YAxis } from 'recharts'
-import { Skeleton } from '@/components/ui/skeleton.tsx'
+import { Skeleton } from '@/components/ui/skeleton'
 import { useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
+import HoverCardIcon from '@/components/reusable-hover-with-icon'
 
 export const description = 'A bar chart'
 
 const chartConfig = {
   numberOfQuestion: {
     label: 'Số lượng câu hỏi:',
-    // color: 'var(--primary-600-base)',
   },
 } satisfies ChartConfig
+
+const groupColors = {
+  'Very Bad': 'var(--very-bad-text)',
+  Bad: 'var(--bad-text)',
+  Average: 'var(--average-text)',
+  Good: 'var(--good-text)',
+  'Very Good': 'var(--very-good-text)',
+}
+
+const groupTranslations = {
+  'Very Bad': 'Rất kém',
+  Bad: 'Kém',
+  Average: 'Trung bình',
+  Good: 'Tốt',
+  'Very Good': 'Rất tốt',
+}
+
+const CustomLegend = ({ data }: { data: Array<{ group: string }> }) => {
+  const uniqueGroups = Array.from(new Set(data.map((item) => item.group)))
+  return (
+    <div className="mt-4 flex flex-wrap justify-center gap-4">
+      {uniqueGroups.map((group) => (
+        <div key={group} className="flex items-center">
+          <div
+            className="mr-2 h-2 w-2 rounded-[2px]"
+            style={{
+              backgroundColor: groupColors[group as keyof typeof groupColors],
+            }}
+          />
+          <span
+            className="text-sm"
+            style={{ color: groupColors[group as keyof typeof groupColors] }}
+          >
+            {groupTranslations[group as keyof typeof groupTranslations] ||
+              group}
+          </span>
+        </div>
+      ))}
+    </div>
+  )
+}
 
 export function BarLineChart({
   name,
@@ -39,33 +80,32 @@ export function BarLineChart({
       const [index, numberOfQuestion] = Object.entries(obj)[0]
       const correctItem = parseFloat(index)
 
-      // Determine the group based on the index and the type
       let group = ''
       if (type === 'difficulty') {
         if (correctItem < 0.25) {
-          group = 'Very Bad' // Quá Khó
+          group = 'Very Bad'
         } else if (correctItem < 0.5) {
-          group = 'Bad' // Khó
+          group = 'Good'
         } else if (correctItem < 0.75) {
-          group = 'Good' // Dễ
+          group = 'Good'
         } else {
-          group = 'Very Good' // Quá Dễ
+          group = 'Very Bad'
         }
       } else if (type === 'discrimination') {
         if (correctItem < 0.1) {
-          group = 'Very Bad' // Kém
+          group = 'Very Bad'
         } else if (correctItem < 0.3) {
-          group = 'Average' // Tạm được
+          group = 'Good'
         } else {
-          group = 'Very Good' // Tốt
+          group = 'Good'
         }
       } else if (type === 'r_pbis') {
         if (correctItem < 0.2) {
-          group = 'Very Bad' // Kém
+          group = 'Very Bad'
         } else if (correctItem <= 0.7) {
-          group = 'Good' // Tốt
+          group = 'Good'
         } else {
-          group = 'Average' // Tạm được
+          group = 'Average'
         }
       }
 
@@ -83,10 +123,10 @@ export function BarLineChart({
     return (
       <Card>
         <CardHeader>
-          <CardTitle className="text-[16px] font-bold leading-[1.5] tracking-[0.2px]">
+          <CardTitle className="flex gap-1 text-[16px] font-bold leading-[1.5] tracking-[0.2px]">
             {name}
+            <HoverCardIcon size={12}>Biểu đồ phân bố</HoverCardIcon>
           </CardTitle>
-          {/* <CardDescription>January - June 2024</CardDescription> */}
         </CardHeader>
         <CardContent>
           <ChartContainer config={chartConfig} className="h-[200px] w-full">
@@ -117,40 +157,14 @@ export function BarLineChart({
                 {transformedArray.map((item, index) => (
                   <Cell
                     key={`cell-${index}`}
-                    fill={
-                      item.group === 'Very Bad'
-                        ? 'var(--very-bad-text)' // Red
-                        : item.group === 'Bad'
-                          ? 'var(--bad-text)' // Orange
-                          : item.group === 'Average'
-                            ? 'var(--average-text)' // Blue
-                            : item.group === 'Good'
-                              ? 'var(--good-text)' // Light Blue
-                              : 'var(--very-good-text)' // Green
-                    }
+                    fill={groupColors[item.group as keyof typeof groupColors]}
                   />
                 ))}
               </Bar>
-
-              {/* <Line
-                type="monotone"
-                dataKey="numberOfQuestion"
-                stroke="#8884d8"
-                strokeWidth={2}
-                dot={{ r: 1.5 }}
-                activeDot={{ r: 2 }}
-              /> */}
             </ComposedChart>
           </ChartContainer>
+          <CustomLegend data={transformedArray} />
         </CardContent>
-        {/* <CardFooter className="flex-col items-start gap-2 text-sm">
-          <div className="flex gap-2 font-medium leading-none">
-            Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-          </div>
-          <div className="leading-none text-muted-foreground">
-            Showing total visitors for the last 6 months
-          </div>
-        </CardFooter> */}
       </Card>
     )
   }
